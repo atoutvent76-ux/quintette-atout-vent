@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archives - Quintette Atout Vent</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+        :root{
+            --teal:#2a7f7f;--teal2:#1d5f6b;--green:#3a8c6e;
+            --gray:#4a5568;--light:#f0f5f5;--white:#fff;
+            --dark:#1a2e35;--mist:#e8f0ef;--accent:#5bb8b8;
+        }
+        body{font-family:'Montserrat',sans-serif;background:var(--white);color:var(--dark);line-height:1.6;}
+        
+        /* Navigation */
+        nav{position:fixed;top:0;width:100%;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1rem 5%;background:rgba(26,46,53,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(91,184,184,0.2);}
+        .logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--accent);letter-spacing:3px;text-transform:uppercase;text-decoration:none;}
+        .logo span{display:block;font-size:.65rem;letter-spacing:6px;font-weight:300;color:rgba(255,255,255,0.55);}
+        .nav-links{display:flex;gap:1.5rem;list-style:none;}
+        .nav-links a{color:rgba(255,255,255,0.8);text-decoration:none;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;}
+
+        header{background:var(--dark);padding:10rem 5% 5rem;text-align:center;position:relative;}
+        h1{font-family:'Cormorant Garamond',serif;font-size:3.5rem;color:var(--white);letter-spacing:4px;text-transform:uppercase;}
+        .s-line{width:60px;height:2px;background:var(--accent);margin:1.5rem auto;}
+
+        .container{max-width:1100px;margin:0 auto;padding:5rem 5%;}
+        .archive-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));gap:3rem;}
+        
+        .card{background:var(--white);border:1px solid rgba(42,127,127,0.1);transition:0.4s;position:relative;overflow:hidden;}
+        .card:hover{transform:translateY(-10px);border-color:var(--accent);}
+        .card-img{width:100%;height:220px;background:var(--teal2);overflow:hidden;}
+        .card-img img{width:100%;height:100%;object-fit:cover;transition:0.6s;}
+        .card:hover .card-img img{transform:scale(1.1);}
+        .card-body{padding:2rem;}
+        .card-date{font-size:.65rem;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:.5rem;font-weight:600;}
+        .card-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;margin-bottom:1rem;}
+        .card-text{font-size:.85rem;color:var(--gray);font-weight:300;margin-bottom:1rem;}
+        .card-prog{font-size:.75rem;color:var(--teal2);font-style:italic;border-top:1px solid var(--light);padding-top:1rem;}
+
+        .btn-back{display:inline-block;margin-top:4rem;padding:1rem 2.5rem;border:1px solid var(--accent);color:var(--accent);text-decoration:none;font-size:.7rem;letter-spacing:3px;text-transform:uppercase;transition:0.3s;}
+        .btn-back:hover{background:var(--accent);color:var(--dark);}
+
+        footer{background:var(--dark);color:rgba(255,255,255,0.4);text-align:center;padding:3rem;font-size:.7rem;letter-spacing:1px;margin-top:5rem;}
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">Atout Vent<span>Quintette</span></a>
+    <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="index.html#agenda">Agenda</a></li>
+    </ul>
+</nav>
+
+<header>
+    <p style="color:var(--accent);letter-spacing:5px;font-size:.7rem;text-transform:uppercase;">Mémoire Musicale</p>
+    <h1>Concerts Passés</h1>
+    <div class="s-line"></div>
+</header>
+
+<div class="container">
+    <div class="archive-grid">
+        
+        <!-- CONCERT 1 -->
+        <div class="card">
+            <div class="card-img">
+                <img src="https://raw.githubusercontent.com/atoutvent76-ux/quintette-atout-vent/main/Gemini_Generated_Image_1puu361puu361puu%20(2).png" alt="Concert Fondation">
+            </div>
+            <div class="card-body">
+                <div class="card-date">Automne 2024</div>
+                <h3 class="card-title">Naissance de l'ensemble</h3>
+                <p class="card-text">Premier cycle de répétitions au Havre et rencontre avec nos premiers soutiens locaux pour lancer ce projet de musique de chambre.</p>
+                <p class="card-prog">Mozart · Haydn · Danzi</p>
+            </div>
+        </div>
+
+        <!-- CONCERT 2 -->
+        <div class="card">
+            <div class="card-img">
+                <div style="width:100%;height:100%;background:linear-gradient(135deg, var(--teal), var(--green));display:flex;align-items:center;justify-content:center;color:white;font-style:italic;font-size:.8rem;">Photo de répétition</div>
+            </div>
+            <div class="card-body">
+                <div class="card-date">Janvier 2025</div>
+                <h3 class="card-title">Matinée Normande</h3>
+                <p class="card-text">Une session de travail acoustique en milieu rural pour tester nos nouveaux arrangements signés Emmanuel Battaglia.</p>
+                <p class="card-prog">Tchaïkovsky · Debussy</p>
+            </div>
+        </div>
+
+        <!-- CONCERT 3 -->
+        <div class="card">
+            <div class="card-img">
+                <div style="width:100%;height:100%;background:var(--teal2);display:flex;align-items:center;justify-content:center;color:white;font-style:italic;font-size:.8rem;">Le Havre en musique</div>
+            </div>
+            <div class="card-body">
+                <div class="card-date">Février 2026</div>
+                <h3 class="card-title">Récital Havrais</h3>
+                <p class="card-text">Concert privé pour nos partenaires culturels présentant le programme définitif de la saison 2026.</p>
+                <p class="card-prog">Grieg · Fauré · Mozart</p>
+            </div>
+        </div>
+
+    </div>
+
+    <center><a href="index.html" class="btn-back">← Revenir à l'accueil</a></center>
+</div>
+
+<footer>
+    © 2026 <span>Quintette Atout Vent</span> · Archives de l'ensemble
+</footer>
+
+</body>
+</html>
