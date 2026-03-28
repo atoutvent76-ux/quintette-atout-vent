@@ -89,9 +89,29 @@
     footer { background: #0c1417; color: rgba(255,255,255,0.3); text-align: center; padding: 3rem 2rem; font-size: 0.65rem; letter-spacing: 1px; }
 
     @media (max-width: 900px) { .concerts-grid { grid-template-columns: 1fr; } .img-box { height: 280px; } }
+    * { cursor: none !important; }
+#cursor-arrow, #cursor-hand {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  width: 24px;
+  height: 28px;
+  top: 0; left: 0;
+}
+#cursor-hand { display: none; }
   </style>
 </head>
 <body oncontextmenu="return false;">
+  <svg id="cursor-arrow" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M2 2L2 20L7.5 14.5L11 21L13.5 20L10 13.5L17 13.5L2 2Z" fill="#5bb8b8" stroke="#0f1c20" stroke-width="1"/>
+</svg>
+<svg id="cursor-hand" viewBox="0 0 24 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M8 12V4a2 2 0 0 1 4 0v8" stroke="#5bb8b8" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M12 12V9a2 2 0 0 1 4 0v3" stroke="#5bb8b8" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M16 12v-1a2 2 0 0 1 4 0v5c0 4-3 7-7 7H9a7 7 0 0 1-7-7v-3a2 2 0 0 1 4 0" stroke="#5bb8b8" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M6 13V7a2 2 0 0 1 2-2" stroke="#5bb8b8" stroke-width="1.5" stroke-linecap="round"/>
+  <path fill="#5bb8b8" fill-opacity="0.15" d="M8 12V4a2 2 0 0 1 4 0v8h4V9a2 2 0 0 1 4 0v8c0 4-3 7-7 7H9a7 7 0 0 1-7-7v-3a2 2 0 0 1 4 0v3H8V12z"/>
+</svg>
 
 <nav role="navigation">
   <a href="index.html" class="logo">Atout Vent<span>Quintette</span></a>
@@ -215,6 +235,30 @@
     });
   })();
 </script>
+<script>
+(function(){
+  if ('ontouchstart' in window) return;
+  const arrow = document.getElementById('cursor-arrow');
+  const hand = document.getElementById('cursor-hand');
 
+  window.addEventListener('mousemove', e => {
+    arrow.style.left = e.clientX + 'px';
+    arrow.style.top = e.clientY + 'px';
+    hand.style.left = e.clientX + 'px';
+    hand.style.top = e.clientY + 'px';
+  });
+
+  document.querySelectorAll('a, button, .concert-card, .btn-back').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      arrow.style.display = 'none';
+      hand.style.display = 'block';
+    });
+    el.addEventListener('mouseleave', () => {
+      arrow.style.display = 'block';
+      hand.style.display = 'none';
+    });
+  });
+})();
+</script>
 </body>
 </html>
