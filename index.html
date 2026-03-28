@@ -144,18 +144,25 @@ nav{
     radial-gradient(ellipse at 60% 40%,rgba(91,184,184,0.12) 0%,transparent 60%),
     radial-gradient(ellipse at 20% 80%,rgba(58,140,110,0.08) 0%,transparent 50%);
 }
-.hero-content{position:relative;z-index:2;padding:2rem 1.5rem;width:100%;max-width:720px;}
+.hero-content{position:relative;z-index:2;padding:2rem 1.5rem;width:100%;max-width:1000px;}
 .hero-orn{width:80px;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);margin:0 auto 1.5rem;}
 .hero-tag{font-size:.68rem;letter-spacing:5px;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;}
+
 h1{
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(2.4rem,10vw,6.5rem);
-  font-weight:600;line-height:1.05;color:var(--white);
-  margin-bottom:.5rem;letter-spacing:4px;text-transform:uppercase;
+  font-size:clamp(2.4rem,6vw,4rem);
+  font-weight:600;line-height:1.0;color:var(--white);
+  margin-bottom:.2rem;letter-spacing:6px;text-transform:uppercase;
+  white-space:nowrap;
 }
-h1 em{font-style:normal;color:var(--accent);display:block;font-size:.55em;letter-spacing:8px;font-weight:300;}
+h1 em{
+  font-style:normal;color:var(--accent);display:block;
+  font-size:.72em;letter-spacing:10px;font-weight:300;
+  white-space:normal;
+}
+
 .hero-desc{
-  max-width:560px;margin:1.5rem auto 2.5rem;
+  max-width:600px;margin:1.5rem auto 2.5rem;
   color:rgba(255,255,255,0.7);font-size:.88rem;line-height:1.9;font-weight:300;
 }
 .hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
@@ -181,6 +188,7 @@ h1 em{font-style:normal;color:var(--accent);display:block;font-size:.55em;letter
 
 @media(max-width:480px){
   .hero-tag{font-size:.6rem;letter-spacing:3px;}
+  h1{white-space:normal;font-size:clamp(2rem,10vw,3rem);}
   .hero-desc{font-size:.82rem;}
   .hero-btns{flex-direction:column;align-items:center;}
   .btn{width:100%;max-width:280px;text-align:center;}
@@ -400,7 +408,7 @@ footer span{color:var(--accent);}
 </head>
 <body data-barba="wrapper">
 
-<!-- CURSEUR CUSTOM (desktop uniquement, géré aussi via CSS media) -->
+<!-- CURSEUR CUSTOM -->
 <svg id="cursor-arrow" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M2 2L2 20L7.5 14.5L11 21L13.5 20L10 13.5L17 13.5L2 2Z" fill="#5bb8b8" stroke="#1a2e35" stroke-width="1"/>
 </svg>
@@ -418,16 +426,12 @@ footer span{color:var(--accent);}
 <!-- NAV -->
 <nav>
   <div class="logo">Atout Vent<span>Quintette</span></div>
-
-  <!-- Desktop links -->
   <ul class="nav-links">
     <li><a href="#about">L'ensemble</a></li>
     <li><a href="#membres">Les Musiciens</a></li>
     <li><a href="#agenda">L'Agenda</a></li>
     <li><a href="#contact">Nous contacter</a></li>
   </ul>
-
-  <!-- Hamburger -->
   <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -725,12 +729,10 @@ footer span{color:var(--accent);}
     drawer.classList.contains('open') ? closeDrawer() : openDrawer();
   });
 
-  // Ferme le drawer en cliquant sur un lien
   document.querySelectorAll('.drawer-link').forEach(link => {
     link.addEventListener('click', closeDrawer);
   });
 
-  // Ferme avec la touche Escape
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeDrawer();
   });
@@ -754,7 +756,6 @@ footer span{color:var(--accent);}
       if (!isDragging) return;
       const dx = Math.abs(e.touches[0].clientX - startX);
       const dy = Math.abs(e.touches[0].clientY - startY);
-      // Priorité au scroll vertical si c'est plus vertical
       if (dy > dx) isDragging = false;
     }, {passive: true});
 
@@ -807,7 +808,6 @@ footer span{color:var(--accent);}
 <!-- CURSEUR : desktop uniquement -->
 <script>
 (function(){
-  // Désactivé sur tactile
   if (!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
 
   const arrow = document.getElementById('cursor-arrow');
