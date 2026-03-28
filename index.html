@@ -157,6 +157,16 @@ h1{font-size:2.5rem;}
 </style>
 </head>
 <body data-barba="wrapper">
+ <svg id="cursor-arrow" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M2 2L2 20L7.5 14.5L11 21L13.5 20L10 13.5L17 13.5L2 2Z" fill="#5bb8b8" stroke="#1a2e35" stroke-width="1"/>
+</svg>
+<svg id="cursor-hand" viewBox="0 0 24 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M8 12V4a2 2 0 0 1 4 0v8" stroke="#5bb8b8" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M12 12V9a2 2 0 0 1 4 0v3" stroke="#5bb8b8" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M16 12v-1a2 2 0 0 1 4 0v5c0 4-3 7-7 7H9a7 7 0 0 1-7-7v-3a2 2 0 0 1 4 0" stroke="#5bb8b8" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M6 13V7a2 2 0 0 1 2-2" stroke="#5bb8b8" stroke-width="1.5" stroke-linecap="round"/>
+  <path fill="#5bb8b8" fill-opacity="0.15" d="M8 12V4a2 2 0 0 1 4 0v8h4V9a2 2 0 0 1 4 0v8c0 4-3 7-7 7H9a7 7 0 0 1-7-7v-3a2 2 0 0 1 4 0v3H8V12z"/>
+</svg>
 
 <!-- RIDEAU ÉMERAUDE -->
 <div class="transition-overlay"></div>
@@ -490,6 +500,34 @@ h1{font-size:2.5rem;}
     initPageScripts();
 })();
 </script>
+<script>
+(function(){
+  if ('ontouchstart' in window) return;
+  const arrow = document.getElementById('cursor-arrow');
+  const hand = document.getElementById('cursor-hand');
 
+  window.addEventListener('mousemove', e => {
+    arrow.style.left = e.clientX + 'px';
+    arrow.style.top = e.clientY + 'px';
+    hand.style.left = e.clientX + 'px';
+    hand.style.top = e.clientY + 'px';
+  });
+
+  function bindHover() {
+    document.querySelectorAll('a, button, .carr-btn, .dot, .btn, .soc-btn').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        arrow.style.display = 'none';
+        hand.style.display = 'block';
+      });
+      el.addEventListener('mouseleave', () => {
+        arrow.style.display = 'block';
+        hand.style.display = 'none';
+      });
+    });
+  }
+
+  bindHover();
+})();
+</script>
 </body>
 </html>
