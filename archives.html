@@ -15,17 +15,17 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --teal:    #2d4f72;
-      --teal2:   #1a2d4a;
-      --green:   #4a7a9b;
-      --gray:    #2c3d52;
-      --light:   #eef2f5;
-      --white:   #f8fafb;
-      --dark:    #0f1c2e;
-      --mist:    #d8e2ea;
-      --accent:  #8fa8b8;
-      --gold:    #c9a96e;
-      --cubic:   cubic-bezier(0.23, 1, 0.32, 1);
+      --teal:   #2d4f72;
+      --teal2:  #1a2d4a;
+      --green:  #4a7a9b;
+      --gray:   #2c3d52;
+      --light:  #eef2f5;
+      --white:  #f8fafb;
+      --dark:   #0f1c2e;
+      --mist:   #d8e2ea;
+      --accent: #8fa8b8;
+      --gold:   #c9a96e;
+      --cubic:  cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     html { scroll-behavior: smooth; }
@@ -42,8 +42,7 @@
       * { cursor: none !important; }
       #cursor-arrow, #cursor-hand {
         position: fixed; pointer-events: none; z-index: 99999;
-        width: 24px; height: 28px; top: 0; left: 0;
-        will-change: left, top;
+        width: 24px; height: 28px; top: 0; left: 0; will-change: left, top;
       }
       #cursor-hand { display: none; }
     }
@@ -77,8 +76,7 @@
     .nav-links a {
       color: rgba(255,255,255,0.7); text-decoration: none;
       font-size: .65rem; letter-spacing: 2.5px; text-transform: uppercase;
-      transition: color .3s, letter-spacing .3s;
-      position: relative; padding-bottom: 3px;
+      transition: color .3s; position: relative; padding-bottom: 3px;
     }
     .nav-links a::after {
       content: ''; position: absolute; bottom: 0; left: 0;
@@ -90,8 +88,7 @@
 
     .hamburger {
       display: none; flex-direction: column; gap: 5px;
-      background: none; border: none; cursor: pointer;
-      padding: .4rem; z-index: 200;
+      background: none; border: none; cursor: pointer; padding: .4rem; z-index: 200;
     }
     .hamburger span {
       display: block; width: 24px; height: 2px;
@@ -106,16 +103,14 @@
       display: none; position: fixed; inset: 0; z-index: 150;
       background: rgba(10, 18, 35, 0.98);
       flex-direction: column; align-items: center; justify-content: center;
-      gap: 2.5rem; opacity: 0; pointer-events: none;
-      transition: opacity .35s ease;
+      gap: 2.5rem; opacity: 0; pointer-events: none; transition: opacity .35s ease;
     }
     .nav-drawer.open { opacity: 1; pointer-events: all; }
     .nav-drawer a {
       color: rgba(255,255,255,0.85); text-decoration: none;
       font-family: 'Cormorant Garamond', serif;
       font-size: 2.2rem; font-weight: 600;
-      letter-spacing: 4px; text-transform: uppercase;
-      transition: color .25s;
+      letter-spacing: 4px; text-transform: uppercase; transition: color .25s;
     }
     .nav-drawer a:hover { color: var(--gold); }
     .nav-drawer-sub {
@@ -145,470 +140,143 @@
       position: absolute; inset: 0;
       background: linear-gradient(145deg, #0f1c2e 0%, #162844 40%, #1e3a5a 75%, #243f65 100%);
     }
-
-    /* Vagues lumineuses */
     .hero-wave {
-      position: absolute; border-radius: 50%;
-      pointer-events: none; opacity: 0;
+      position: absolute; border-radius: 50%; pointer-events: none; opacity: 0;
       animation: waveIn 2s ease forwards, wavePulse 8s ease-in-out infinite;
     }
-    .hero-wave-1 {
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(201,169,110,0.12) 0%, transparent 65%);
-      top: -200px; right: -100px;
-      animation-delay: 0s, 0s;
-    }
-    .hero-wave-2 {
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(74,122,155,0.18) 0%, transparent 65%);
-      bottom: -150px; left: -80px;
-      animation-delay: .4s, 3s;
-    }
-    .hero-wave-3 {
-      width: 200px; height: 200px;
-      background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 65%);
-      top: 35%; left: 38%;
-      animation-delay: .7s, 6s;
-    }
-    @keyframes waveIn {
-      from { opacity: 0; transform: scale(.8); }
-      to   { opacity: 1; transform: scale(1); }
-    }
-    @keyframes wavePulse {
-      0%, 100% { transform: scale(1) translate(0,0); }
-      33%      { transform: scale(1.06) translate(12px,-10px); }
-      66%      { transform: scale(0.96) translate(-8px, 8px); }
-    }
-
-    /* Ligne horizontale décorative animée */
+    .hero-wave-1 { width:600px; height:600px; background:radial-gradient(circle,rgba(201,169,110,0.12) 0%,transparent 65%); top:-200px; right:-100px; animation-delay:0s,0s; }
+    .hero-wave-2 { width:400px; height:400px; background:radial-gradient(circle,rgba(74,122,155,0.18) 0%,transparent 65%); bottom:-150px; left:-80px; animation-delay:.4s,3s; }
+    .hero-wave-3 { width:200px; height:200px; background:radial-gradient(circle,rgba(255,255,255,0.07) 0%,transparent 65%); top:35%; left:38%; animation-delay:.7s,6s; }
+    @keyframes waveIn { from{opacity:0;transform:scale(.8);}to{opacity:1;transform:scale(1);} }
+    @keyframes wavePulse { 0%,100%{transform:scale(1) translate(0,0);}33%{transform:scale(1.06) translate(12px,-10px);}66%{transform:scale(0.96) translate(-8px,8px);} }
     .hero-rule {
-      position: absolute; top: 42%; left: 0; right: 0;
-      height: 1px; pointer-events: none;
-      background: linear-gradient(90deg, transparent 0%, rgba(201,169,110,0.15) 30%, rgba(201,169,110,0.25) 50%, rgba(201,169,110,0.15) 70%, transparent 100%);
-      animation: ruleSlide 1.4s var(--cubic) forwards;
-      transform-origin: center;
+      position:absolute;top:42%;left:0;right:0;height:1px;pointer-events:none;
+      background:linear-gradient(90deg,transparent 0%,rgba(201,169,110,0.15) 30%,rgba(201,169,110,0.25) 50%,rgba(201,169,110,0.15) 70%,transparent 100%);
+      animation:ruleSlide 1.4s var(--cubic) forwards;transform-origin:center;
     }
-    @keyframes ruleSlide {
-      from { transform: scaleX(0); opacity: 0; }
-      to   { transform: scaleX(1); opacity: 1; }
-    }
-
-    canvas#particles-js {
-      position: absolute; inset: 0; z-index: 2; pointer-events: none;
-    }
-
-    .hero-content {
-      position: relative; z-index: 3; text-align: center; padding: 0 2rem;
-      animation: heroFade 1.2s var(--cubic) .2s both;
-    }
-    @keyframes heroFade {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .hero-orn {
-      display: flex; align-items: center; justify-content: center;
-      gap: .8rem; margin-bottom: 1.5rem;
-    }
-    .hero-orn-line {
-      width: 60px; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold));
-    }
-    .hero-orn-line:last-child { transform: scaleX(-1); }
-    .hero-orn-diamond {
-      width: 6px; height: 6px; background: var(--gold);
-      transform: rotate(45deg); flex-shrink: 0;
-    }
-    .hero-tag {
-      font-size: .72rem; letter-spacing: 5px;
-      text-transform: uppercase; color: var(--gold);
-      margin-bottom: 1.2rem; opacity: .85;
-    }
-    #hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.4rem, 6.5vw, 4.5rem);
-      font-weight: 300; letter-spacing: 8px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.92);
-      line-height: 1.05;
-    }
-    #hero h1 strong {
-      font-weight: 600; color: #fff;
-      display: block;
-    }
-    #hero h1 em {
-      font-style: italic; font-weight: 300;
-      color: var(--gold); font-size: .75em;
-      letter-spacing: 10px; display: block;
-      margin-top: .4rem;
-    }
-    .hero-subtitle {
-      margin-top: 1.5rem;
-      font-size: .7rem; letter-spacing: 3px;
-      color: rgba(255,255,255,0.35);
-      text-transform: uppercase;
-    }
-
-    @media (max-width: 480px) {
-      .hero-tag { font-size: .6rem; letter-spacing: 3px; }
-      #hero h1 { font-size: clamp(1.8rem, 9vw, 2.6rem); }
-    }
+    @keyframes ruleSlide{from{transform:scaleX(0);opacity:0;}to{transform:scaleX(1);opacity:1;}}
+    canvas#particles-js{position:absolute;inset:0;z-index:2;pointer-events:none;}
+    .hero-content{position:relative;z-index:3;text-align:center;padding:0 2rem;animation:heroFade 1.2s var(--cubic) .2s both;}
+    @keyframes heroFade{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+    .hero-orn{display:flex;align-items:center;justify-content:center;gap:.8rem;margin-bottom:1.5rem;}
+    .hero-orn-line{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+    .hero-orn-line:last-child{transform:scaleX(-1);}
+    .hero-orn-diamond{width:6px;height:6px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;}
+    .hero-tag{font-size:.72rem;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;opacity:.85;}
+    #hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,6.5vw,4.5rem);font-weight:300;letter-spacing:8px;text-transform:uppercase;color:rgba(255,255,255,0.92);line-height:1.05;}
+    #hero h1 strong{font-weight:600;color:#fff;display:block;}
+    #hero h1 em{font-style:italic;font-weight:300;color:var(--gold);font-size:.75em;letter-spacing:10px;display:block;margin-top:.4rem;}
+    .hero-subtitle{margin-top:1.5rem;font-size:.7rem;letter-spacing:3px;color:rgba(255,255,255,0.35);text-transform:uppercase;}
+    @media(max-width:480px){.hero-tag{font-size:.6rem;letter-spacing:3px;}#hero h1{font-size:clamp(1.8rem,9vw,2.6rem);}}
 
     /* ====== SECTION ====== */
-    .si { max-width: 1200px; margin: 0 auto; padding: 5rem 5%; }
+    .si{max-width:1200px;margin:0 auto;padding:5rem 5%;}
+    .s-header{margin-bottom:4rem;}
+    .s-tag{font-size:.62rem;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;display:block;}
+    .s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:600;color:var(--teal2);margin-bottom:1rem;}
+    .s-line{display:flex;align-items:center;gap:.8rem;}
+    .s-line-bar{width:40px;height:1px;background:var(--gold);}
+    .s-line-dot{width:4px;height:4px;background:var(--gold);transform:rotate(45deg);}
+    .s-line-bar2{width:20px;height:1px;background:var(--mist);}
 
-    .s-header { margin-bottom: 4rem; }
-    .s-tag {
-      font-size: .62rem; letter-spacing: 5px; text-transform: uppercase;
-      color: var(--gold); margin-bottom: .6rem; display: block;
-    }
-    .s-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      font-weight: 600; color: var(--teal2);
-      margin-bottom: 1rem;
-    }
-    .s-line {
-      display: flex; align-items: center; gap: .8rem;
-    }
-    .s-line-bar { width: 40px; height: 1px; background: var(--gold); }
-    .s-line-dot { width: 4px; height: 4px; background: var(--gold); transform: rotate(45deg); }
-    .s-line-bar2 { width: 20px; height: 1px; background: var(--mist); }
-
-    /* ====== GRILLE CONCERTS ====== */
-    .concerts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(360px, 100%), 1fr));
-      gap: 3rem;
-    }
+    /* ====== GRILLE ====== */
+    .concerts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(360px,100%),1fr));gap:3rem;}
 
     /* ====== REVEAL ====== */
-    .reveal { opacity: 0; transform: translateY(40px); transition: opacity .9s var(--cubic), transform .9s var(--cubic); }
-    .reveal.active { opacity: 1; transform: translateY(0); }
-    .reveal:nth-child(2) { transition-delay: .15s; }
-    .reveal:nth-child(3) { transition-delay: .3s; }
+    .reveal{opacity:0;transform:translateY(40px);transition:opacity .9s var(--cubic),transform .9s var(--cubic);}
+    .reveal.active{opacity:1;transform:translateY(0);}
+    .reveal:nth-child(2){transition-delay:.15s;}
+    .reveal:nth-child(3){transition-delay:.3s;}
 
-    /* ====== CARTE CONCERT ====== */
-    .concert-card {
-      background: #fff;
-      position: relative; display: flex; flex-direction: column;
-      cursor: pointer;
-      border: 1px solid rgba(45,79,114,0.1);
-      transition: box-shadow .5s var(--cubic), border-color .4s, transform .5s var(--cubic);
-      overflow: hidden;
-    }
-    .concert-card::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(201,169,110,0.05) 0%, transparent 60%);
-      opacity: 0; transition: opacity .4s;
-      z-index: 0; pointer-events: none;
-    }
-    .concert-card:hover {
-      box-shadow: 0 30px 70px rgba(26,45,74,0.16);
-      border-color: rgba(201,169,110,0.3);
-      transform: translateY(-4px);
-    }
-    .concert-card:hover::before { opacity: 1; }
+    /* ====== CARTE ====== */
+    .concert-card{background:#fff;position:relative;display:flex;flex-direction:column;cursor:pointer;border:1px solid rgba(45,79,114,0.1);overflow:hidden;transition:box-shadow .5s var(--cubic),border-color .4s,transform .5s var(--cubic);}
+    .concert-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,169,110,0.05) 0%,transparent 60%);opacity:0;transition:opacity .4s;z-index:0;pointer-events:none;}
+    .concert-card:hover{box-shadow:0 30px 70px rgba(26,45,74,0.16);border-color:rgba(201,169,110,0.3);transform:translateY(-4px);}
+    .concert-card:hover::before{opacity:1;}
+    .card-num{position:absolute;top:1.2rem;left:1.2rem;z-index:10;width:36px;height:36px;background:var(--dark);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--gold);border:1px solid rgba(201,169,110,0.3);}
 
-    /* Badge numéro */
-    .card-num {
-      position: absolute; top: 1.2rem; left: 1.2rem; z-index: 10;
-      width: 36px; height: 36px;
-      background: var(--dark);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem; font-weight: 600; color: var(--gold);
-      border: 1px solid rgba(201,169,110,0.3);
+    /* IMAGE BOX */
+    .img-box{
+      position:relative; overflow:hidden; background:var(--dark);
+      height:420px;          /* hauteur fixe — image en contain */
+      display:flex; align-items:center; justify-content:center;
     }
+    .concert-card-img{
+      width:100%; height:100%;
+      object-fit:contain;          /* affiche l'image entière sans rogner */
+      object-position:center center;
+      display:block;
+      opacity:0;
+      transition:opacity .6s, transform 1.2s var(--cubic), filter .5s;
+    }
+    .concert-card-img.visible{opacity:1;}
+    .concert-card:hover .concert-card-img{transform:scale(1.03);filter:brightness(1.04);}
 
-    /* Zone image */
-    .img-box {
-      position: relative;
-      overflow: hidden; background: var(--dark);
-      display: flex; align-items: center; justify-content: center;
-    }
-
-    /* Hauteur adaptée — portrait vs paysage */
-    .img-box.portrait-box { height: 480px; }
-    .img-box.landscape-box { height: 300px; }
-    .img-box.square-box { height: 380px; }
-
-    .concert-card-img {
-      width: 100%; height: 100%;
-      object-fit: contain;          /* On voit TOUJOURS l'affiche entière */
-      object-position: center center;
-      transition: transform 1.4s var(--cubic), filter .6s;
-      pointer-events: none; display: block;
-      opacity: 0; transition: opacity .6s;
-    }
-    .concert-card-img.loaded { opacity: 1; }
-    .concert-card:hover .concert-card-img {
-      transform: scale(1.03);
-      filter: brightness(1.04);
-    }
-
-    /* Overlay gradient discret */
-    .img-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(
-        to bottom,
-        transparent 55%,
-        rgba(15,28,46,0.55) 100%
-      );
-      z-index: 2; pointer-events: none;
-      transition: opacity .4s;
-    }
-    .concert-card:hover .img-overlay { opacity: .7; }
-
-    /* Icône "agrandir" au survol */
-    .img-zoom-hint {
-      position: absolute; bottom: 1rem; right: 1rem; z-index: 3;
-      width: 34px; height: 34px;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.25);
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0; transform: scale(.8);
-      transition: opacity .4s, transform .4s var(--cubic);
-      backdrop-filter: blur(6px);
-    }
-    .img-zoom-hint svg { width: 14px; height: 14px; stroke: #fff; fill: none; }
-    .concert-card:hover .img-zoom-hint { opacity: 1; transform: scale(1); }
-
-    /* Placeholder */
-    .img-placeholder {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      background: linear-gradient(145deg, #0f1c2e 0%, #162844 100%);
-      color: var(--accent); gap: 1rem;
-      transition: opacity .4s;
-    }
-    .img-placeholder svg { width: 36px; opacity: .3; }
-    .img-placeholder span {
-      font-size: .6rem; letter-spacing: 3px; text-transform: uppercase;
-      opacity: .35;
-    }
-    .img-placeholder.hidden { opacity: 0; pointer-events: none; }
+    .img-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(15,28,46,0.45) 100%);z-index:2;pointer-events:none;transition:opacity .4s;}
+    .concert-card:hover .img-overlay{opacity:.7;}
 
     /* Spinner */
-    .img-spinner {
-      position: absolute; top: 50%; left: 50%;
-      width: 28px; height: 28px; margin: -14px 0 0 -14px;
-      border: 1.5px solid rgba(201,169,110,0.2);
-      border-top-color: var(--gold);
-      border-radius: 50%;
-      animation: spin .9s linear infinite; z-index: 3;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .img-spinner.hidden { display: none; }
+    .img-spinner{position:absolute;top:50%;left:50%;width:30px;height:30px;margin:-15px 0 0 -15px;border:1.5px solid rgba(201,169,110,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin .9s linear infinite;z-index:5;}
+    .img-spinner.hidden{display:none;}
+    @keyframes spin{to{transform:rotate(360deg);}}
 
-    @media (hover: none), (pointer: coarse) {
-      .img-zoom-hint { display: none; }
-      .img-box::after {
-        content: "Appuyer pour agrandir";
-        position: absolute; bottom: 0; left: 0; right: 0; z-index: 3;
-        padding: .5rem; background: rgba(15,28,46,.6);
-        color: rgba(255,255,255,.6); font-size: .58rem;
-        letter-spacing: 2px; text-transform: uppercase; text-align: center;
-      }
-    }
+    /* Zoom hint */
+    .img-zoom-hint{position:absolute;bottom:1rem;right:1rem;z-index:3;width:34px;height:34px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.8);transition:opacity .4s,transform .4s var(--cubic);backdrop-filter:blur(6px);}
+    .img-zoom-hint svg{width:14px;height:14px;stroke:#fff;fill:none;}
+    .concert-card:hover .img-zoom-hint{opacity:1;transform:scale(1);}
+    @media(hover:none),(pointer:coarse){.img-zoom-hint{display:none;}}
+
+    @media(max-width:600px){.img-box{height:300px;}}
 
     /* Corps carte */
-    .concert-card-body {
-      padding: 1.8rem 2rem 2.2rem;
-      position: relative; z-index: 1;
-      border-top: 1px solid rgba(45,79,114,0.08);
-      flex: 1;
-    }
-    .date {
-      font-size: .62rem; color: var(--gold);
-      letter-spacing: 4px; font-weight: 600;
-      margin-bottom: .6rem; display: flex;
-      align-items: center; gap: .5rem;
-      text-transform: uppercase;
-    }
-    .date::before {
-      content: ''; display: inline-block;
-      width: 20px; height: 1px; background: var(--gold);
-    }
-    .title {
-      font-family: 'Cormorant Garamond', serif; font-size: 2rem;
-      color: var(--teal2); font-weight: 600; line-height: 1.08;
-      position: relative; display: inline-block;
-    }
-    .title::after {
-      content: ''; position: absolute; left: 0; bottom: -5px;
-      width: 0; height: 2px;
-      background: linear-gradient(90deg, var(--gold), rgba(201,169,110,0.3));
-      transition: width .7s var(--cubic);
-    }
-    .concert-card:hover .title::after { width: 100%; }
-    .desc {
-      font-size: .82rem; color: var(--gray);
-      font-weight: 300; line-height: 1.85; margin-top: 1rem;
-    }
-
-    /* Lire plus */
-    .card-cta {
-      display: inline-flex; align-items: center; gap: .4rem;
-      margin-top: 1.2rem;
-      font-size: .6rem; letter-spacing: 3px; text-transform: uppercase;
-      color: var(--teal); font-weight: 600;
-      transition: gap .3s, color .3s;
-      cursor: pointer; background: none; border: none;
-      font-family: 'Montserrat', sans-serif;
-    }
-    .card-cta svg { width: 14px; transition: transform .3s; }
-    .concert-card:hover .card-cta { gap: .7rem; color: var(--teal2); }
-    .concert-card:hover .card-cta svg { transform: translateX(4px); }
-
-    @media (max-width: 600px) {
-      .img-box.portrait-box { height: 360px; }
-      .img-box.landscape-box { height: 240px; }
-      .img-box.square-box { height: 300px; }
-      .title { font-size: 1.6rem; }
-      .desc { font-size: .78rem; }
-      .concerts-grid { gap: 2rem; }
-      .si { padding: 3rem 5%; }
-      .concert-card-body { padding: 1.3rem 1.3rem 1.6rem; }
-    }
+    .concert-card-body{padding:1.8rem 2rem 2.2rem;position:relative;z-index:1;border-top:1px solid rgba(45,79,114,0.08);flex:1;}
+    .date{font-size:.62rem;color:var(--gold);letter-spacing:4px;font-weight:600;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem;text-transform:uppercase;}
+    .date::before{content:'';display:inline-block;width:20px;height:1px;background:var(--gold);}
+    .title{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--teal2);font-weight:600;line-height:1.08;position:relative;display:inline-block;}
+    .title::after{content:'';position:absolute;left:0;bottom:-5px;width:0;height:2px;background:linear-gradient(90deg,var(--gold),rgba(201,169,110,0.3));transition:width .7s var(--cubic);}
+    .concert-card:hover .title::after{width:100%;}
+    .desc{font-size:.82rem;color:var(--gray);font-weight:300;line-height:1.85;margin-top:1rem;}
+    .card-cta{display:inline-flex;align-items:center;gap:.4rem;margin-top:1.2rem;font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--teal);font-weight:600;transition:gap .3s,color .3s;cursor:pointer;background:none;border:none;font-family:'Montserrat',sans-serif;}
+    .card-cta svg{width:14px;transition:transform .3s;}
+    .concert-card:hover .card-cta{gap:.7rem;color:var(--teal2);}
+    .concert-card:hover .card-cta svg{transform:translateX(4px);}
+    @media(max-width:600px){.title{font-size:1.6rem;}.desc{font-size:.78rem;}.concerts-grid{gap:2rem;}.si{padding:3rem 5%;}.concert-card-body{padding:1.3rem 1.3rem 1.6rem;}}
 
     /* ====== LIGHTBOX ====== */
-    #lightbox {
-      position: fixed; inset: 0;
-      background: rgba(8, 16, 28, 0.97);
-      z-index: 2000; display: none;
-      align-items: center; justify-content: center;
-      backdrop-filter: blur(16px) saturate(1.2);
-      touch-action: none;
-    }
-    #lightbox.active { display: flex; }
-
-    #lb-content {
-      position: relative;
-      display: flex; align-items: center; justify-content: center;
-      max-width: 90vw; max-height: 90vh;
-    }
-    #lightbox img {
-      max-width: 88vw; max-height: 86vh;
-      transform: scale(0.92) translateY(12px);
-      opacity: 0;
-      transition: transform 0.5s var(--cubic), opacity 0.4s;
-      pointer-events: none; display: block;
-      box-shadow: 0 40px 100px rgba(0,0,0,0.6);
-      object-fit: contain;
-    }
-    #lightbox.loaded img { transform: scale(1) translateY(0); opacity: 1; }
-
-    /* Cadre décoratif lightbox */
-    #lb-frame {
-      position: absolute; inset: -10px;
-      border: 1px solid rgba(201,169,110,0.15);
-      pointer-events: none;
-      opacity: 0; transition: opacity .5s;
-    }
-    #lb-frame::before, #lb-frame::after {
-      content: '';
-      position: absolute; width: 16px; height: 16px;
-      border-color: var(--gold); border-style: solid;
-      opacity: .5;
-    }
-    #lb-frame::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
-    #lb-frame::after  { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
-    #lightbox.loaded #lb-frame { opacity: 1; }
-
-    #lb-spinner {
-      position: absolute; top: 50%; left: 50%;
-      width: 36px; height: 36px; margin: -18px 0 0 -18px;
-      border: 1.5px solid rgba(201,169,110,0.2);
-      border-top-color: var(--gold);
-      border-radius: 50%;
-      animation: spin .9s linear infinite;
-    }
-    #lb-spinner.hidden { display: none; }
-
-    .lb-close {
-      position: absolute; top: 1.2rem; right: 1.5rem;
-      background: none;
-      border: 1px solid rgba(201,169,110,0.3);
-      color: var(--gold); font-size: 1rem; line-height: 1;
-      width: 40px; height: 40px;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      transition: background .25s, border-color .25s, transform .25s;
-      z-index: 10;
-      font-family: 'Cormorant Garamond', serif;
-    }
-    .lb-close:hover {
-      background: rgba(201,169,110,0.12);
-      border-color: var(--gold);
-      transform: rotate(90deg);
-    }
-
-    /* Titre lightbox */
-    #lb-title {
-      position: absolute; bottom: 1.5rem; left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: .85rem; letter-spacing: 3px;
-      color: rgba(255,255,255,0.45); text-transform: uppercase;
-      white-space: nowrap;
-      opacity: 0; transition: opacity .5s .3s;
-    }
-    #lightbox.loaded #lb-title { opacity: 1; }
+    #lightbox{position:fixed;inset:0;background:rgba(8,16,28,0.97);z-index:2000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(16px) saturate(1.2);touch-action:none;}
+    #lightbox.active{display:flex;}
+    #lb-content{position:relative;display:flex;align-items:center;justify-content:center;max-width:90vw;max-height:90vh;}
+    #lightbox img{max-width:88vw;max-height:86vh;transform:scale(0.92) translateY(12px);opacity:0;transition:transform 0.5s var(--cubic),opacity 0.4s;pointer-events:none;display:block;box-shadow:0 40px 100px rgba(0,0,0,0.6);object-fit:contain;}
+    #lightbox.loaded img{transform:scale(1) translateY(0);opacity:1;}
+    #lb-frame{position:absolute;inset:-10px;border:1px solid rgba(201,169,110,0.15);pointer-events:none;opacity:0;transition:opacity .5s;}
+    #lb-frame::before,#lb-frame::after{content:'';position:absolute;width:16px;height:16px;border-color:var(--gold);border-style:solid;opacity:.5;}
+    #lb-frame::before{top:-1px;left:-1px;border-width:1px 0 0 1px;}
+    #lb-frame::after{bottom:-1px;right:-1px;border-width:0 1px 1px 0;}
+    #lightbox.loaded #lb-frame{opacity:1;}
+    #lb-spinner{position:absolute;top:50%;left:50%;width:36px;height:36px;margin:-18px 0 0 -18px;border:1.5px solid rgba(201,169,110,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin .9s linear infinite;}
+    #lb-spinner.hidden{display:none;}
+    .lb-close{position:absolute;top:1.2rem;right:1.5rem;background:none;border:1px solid rgba(201,169,110,0.3);color:var(--gold);font-size:1rem;line-height:1;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .25s,border-color .25s,transform .25s;z-index:10;font-family:'Cormorant Garamond',serif;}
+    .lb-close:hover{background:rgba(201,169,110,0.12);border-color:var(--gold);transform:rotate(90deg);}
+    #lb-title{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-family:'Cormorant Garamond',serif;font-size:.85rem;letter-spacing:3px;color:rgba(255,255,255,0.45);text-transform:uppercase;white-space:nowrap;opacity:0;transition:opacity .5s .3s;}
+    #lightbox.loaded #lb-title{opacity:1;}
 
     /* ====== BTN & FOOTER ====== */
-    .btn-wrap { text-align: center; margin-top: 5rem; }
-    .btn-back {
-      display: inline-flex; align-items: center; gap: .8rem;
-      padding: 1.1rem 3.2rem;
-      background: transparent;
-      color: var(--teal2);
-      text-decoration: none; font-size: .65rem;
-      letter-spacing: 3.5px; text-transform: uppercase;
-      transition: background .35s, color .35s, border-color .35s;
-      border: 1px solid rgba(45,79,114,0.35);
-      font-family: 'Montserrat', sans-serif; font-weight: 500;
-      position: relative; overflow: hidden;
-    }
-    .btn-back::before {
-      content: ''; position: absolute; inset: 0;
-      background: var(--teal2); transform: translateX(-100%);
-      transition: transform .45s var(--cubic);
-      z-index: 0;
-    }
-    .btn-back:hover::before { transform: translateX(0); }
-    .btn-back:hover { color: #fff; border-color: var(--teal2); }
-    .btn-back span { position: relative; z-index: 1; }
-
-    footer {
-      background: var(--dark);
-      color: rgba(232,237,242,0.35);
-      text-align: center; padding: 2.5rem 2rem;
-      font-size: .68rem; letter-spacing: 1px;
-      border-top: 1px solid rgba(201,169,110,0.1);
-    }
-    footer .accent { color: var(--gold); }
-    .footer-social {
-      display: flex; justify-content: center; gap: 2rem;
-      margin-bottom: 1.2rem; flex-wrap: wrap;
-    }
-    .footer-social a {
-      color: rgba(232,237,242,0.35); text-decoration: none;
-      font-size: .65rem; letter-spacing: 1.5px;
-      transition: color .3s; display: flex; align-items: center; gap: .4rem;
-    }
-    .footer-social a:hover { color: var(--gold); }
-    .footer-sep {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(201,169,110,0.15), transparent);
-      margin-bottom: 1.5rem;
-    }
+    .btn-wrap{text-align:center;margin-top:5rem;}
+    .btn-back{display:inline-flex;align-items:center;gap:.8rem;padding:1.1rem 3.2rem;background:transparent;color:var(--teal2);text-decoration:none;font-size:.65rem;letter-spacing:3.5px;text-transform:uppercase;transition:background .35s,color .35s,border-color .35s;border:1px solid rgba(45,79,114,0.35);font-family:'Montserrat',sans-serif;font-weight:500;position:relative;overflow:hidden;}
+    .btn-back::before{content:'';position:absolute;inset:0;background:var(--teal2);transform:translateX(-100%);transition:transform .45s var(--cubic);z-index:0;}
+    .btn-back:hover::before{transform:translateX(0);}
+    .btn-back:hover{color:#fff;border-color:var(--teal2);}
+    .btn-back span{position:relative;z-index:1;}
+    footer{background:var(--dark);color:rgba(232,237,242,0.35);text-align:center;padding:2.5rem 2rem;font-size:.68rem;letter-spacing:1px;border-top:1px solid rgba(201,169,110,0.1);}
+    footer .accent{color:var(--gold);}
+    .footer-social{display:flex;justify-content:center;gap:2rem;margin-bottom:1.2rem;flex-wrap:wrap;}
+    .footer-social a{color:rgba(232,237,242,0.35);text-decoration:none;font-size:.65rem;letter-spacing:1.5px;transition:color .3s;}
+    .footer-social a:hover{color:var(--gold);}
+    .footer-sep{height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.15),transparent);margin-bottom:1.5rem;}
   </style>
 </head>
 <body>
 
-<!-- CURSEURS DESKTOP -->
 <svg id="cursor-arrow" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M2 2L2 20L7.5 14.5L11 21L13.5 20L10 13.5L17 13.5L2 2Z" fill="#c9a96e" stroke="#1a2d4a" stroke-width="1"/>
 </svg>
@@ -620,7 +288,6 @@
   <path fill="#c9a96e" fill-opacity="0.15" d="M8 12V4a2 2 0 0 1 4 0v8h4V9a2 2 0 0 1 4 0v8c0 4-3 7-7 7H9a7 7 0 0 1-7-7v-3a2 2 0 0 1 4 0v3H8V12z"/>
 </svg>
 
-<!-- NAV -->
 <nav role="navigation" id="main-nav">
   <a href="index.html" class="logo">Atout Vent<span>Quintette</span></a>
   <ul class="nav-links">
@@ -634,7 +301,6 @@
   </button>
 </nav>
 
-<!-- Drawer mobile -->
 <nav class="nav-drawer" id="nav-drawer" aria-hidden="true">
   <a href="index.html" class="drawer-link">Accueil</a>
   <a href="index.html#about" class="drawer-link">L'ensemble</a>
@@ -647,7 +313,6 @@
   </div>
 </nav>
 
-<!-- HERO -->
 <header id="hero">
   <div class="hero-bg"></div>
   <div class="hero-wave hero-wave-1"></div>
@@ -662,15 +327,11 @@
       <div class="hero-orn-line"></div>
     </div>
     <p class="hero-tag">Le Souffle de l'Histoire</p>
-    <h1>
-      <strong>Concerts</strong>
-      <em>Passés</em>
-    </h1>
+    <h1><strong>Concerts</strong><em>Passés</em></h1>
     <p class="hero-subtitle">Quintette Atout Vent · Le Havre</p>
   </div>
 </header>
 
-<!-- CONCERTS -->
 <main class="si">
 
   <div class="reveal s-header">
@@ -685,23 +346,14 @@
 
   <div class="concerts-grid">
 
-    <!-- Pierre et le Loup -->
+    <!-- I — Pierre et le Loup -->
     <article class="concert-card reveal"
       data-title="Pierre et le Loup"
       data-img="https://raw.githubusercontent.com/atoutvent76-ux/quintette-atout-vent/main/concert%20pierre%20et%20le%20loup.jpg">
       <div class="card-num">I</div>
-      <div class="img-box square-box" id="box-pierre">
-        <div class="img-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-            <rect x="3" y="3" width="18" height="18" rx="2"/>
-            <circle cx="8.5" cy="8.5" r="1.5"/>
-            <path d="M21 15l-5-5L5 21"/>
-          </svg>
-          <span>Chargement…</span>
-        </div>
+      <div class="img-box">
         <div class="img-spinner"></div>
-        <img class="concert-card-img" id="img-pierre"
-             alt="Affiche du concert Pierre et le Loup" loading="lazy">
+        <img class="concert-card-img" alt="Affiche du concert Pierre et le Loup">
         <div class="img-overlay"></div>
         <div class="img-zoom-hint">
           <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -713,35 +365,23 @@
         <span class="date">Saison 2024 — 2025</span>
         <h2 class="title">Pierre et le Loup</h2>
         <p class="desc">Conte musical de Prokofiev adapté pour quintette. Une narration immersive au Havre où chaque instrument incarne un personnage.</p>
-        <button class="card-cta" onclick="openLightbox(this.closest('.concert-card'))">
-          Voir l'affiche
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+        <button class="card-cta">Voir l'affiche
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
       </div>
     </article>
 
-    <!-- Casse-Noisette -->
+    <!-- II — Casse-Noisette -->
     <article class="concert-card reveal"
       data-title="Casse-Noisette"
       data-img="https://raw.githubusercontent.com/atoutvent76-ux/quintette-atout-vent/main/affiche%20casse%20noisette%20.png">
       <div class="card-num">II</div>
-      <div class="img-box square-box" id="box-casse">
-        <div class="img-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-            <rect x="3" y="3" width="18" height="18" rx="2"/>
-            <circle cx="8.5" cy="8.5" r="1.5"/>
-            <path d="M21 15l-5-5L5 21"/>
-          </svg>
-          <span>Chargement…</span>
-        </div>
+      <div class="img-box">
         <div class="img-spinner"></div>
-        <img class="concert-card-img" id="img-casse"
-             alt="Affiche du concert Casse-Noisette" loading="lazy">
+        <img class="concert-card-img" alt="Affiche du concert Casse-Noisette">
         <div class="img-overlay"></div>
         <div class="img-zoom-hint">
-          <svg viewBox="0 0 24 24" stroke-width="1.5" stroke="white" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
           </svg>
         </div>
@@ -750,40 +390,23 @@
         <span class="date">Décembre 2025</span>
         <h2 class="title">Casse-Noisette</h2>
         <p class="desc">La magie de Tchaïkovski revisitée pour les fêtes de fin d'année. Un voyage enchanté au cœur de l'hiver musical.</p>
-        <button class="card-cta" onclick="openLightbox(this.closest('.concert-card'))">
-          Voir l'affiche
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+        <button class="card-cta">Voir l'affiche
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
       </div>
     </article>
 
-    <!-- Sandouville -->
+    <!-- III — Sandouville (cascade d'URLs) -->
     <article class="concert-card reveal"
       data-title="Église de Sandouville"
-      data-img-candidates='[
-        "https://raw.githubusercontent.com/atoutvent76-ux/quintette-atout-vent/main/final%20(4)%20.png",
-        "https://raw.githubusercontent.com/atoutvent76-ux/quintette-atout-vent/main/final%20(4).png",
-        "https://raw.githubusercontent.com/atoutvent76-ux/quintette-atout-vent/main/final(4).png",
-        "https://raw.githubusercontent.com/atoutvent76-ux/quintette-atout-vent/main/final%20%284%29%20.png",
-        "https://raw.githubusercontent.com/atoutvent76-ux/quintette-atout-vent/main/final%20%284%29.png"
-      ]'>
+      data-img="">
       <div class="card-num">III</div>
-      <div class="img-box square-box" id="box-sandou">
-        <div class="img-placeholder" id="sandou-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-            <rect x="3" y="3" width="18" height="18" rx="2"/>
-            <circle cx="8.5" cy="8.5" r="1.5"/>
-            <path d="M21 15l-5-5L5 21"/>
-          </svg>
-          <span>Chargement…</span>
-        </div>
+      <div class="img-box">
         <div class="img-spinner" id="sandou-spinner"></div>
         <img class="concert-card-img" id="img-sandou" alt="Affiche du concert de Sandouville">
         <div class="img-overlay"></div>
         <div class="img-zoom-hint">
-          <svg viewBox="0 0 24 24" stroke-width="1.5" stroke="white" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
           </svg>
         </div>
@@ -792,11 +415,8 @@
         <span class="date">29 Mars 2026</span>
         <h2 class="title">Église de Sandouville</h2>
         <p class="desc">Concert à l'église de Sandouville grâce à l'association La Hêtraie. Un écrin de pierre pour un programme d'exception.</p>
-        <button class="card-cta" onclick="openLightbox(this.closest('.concert-card'))">
-          Voir l'affiche
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+        <button class="card-cta">Voir l'affiche
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
       </div>
     </article>
@@ -804,13 +424,10 @@
   </div>
 
   <div class="btn-wrap reveal">
-    <a href="index.html" class="btn-back">
-      <span>← Retour à l'accueil</span>
-    </a>
+    <a href="index.html" class="btn-back"><span>← Retour à l'accueil</span></a>
   </div>
 </main>
 
-<!-- LIGHTBOX -->
 <div id="lightbox" role="dialog" aria-modal="true" aria-label="Image agrandie">
   <button class="lb-close" id="lb-close-btn" aria-label="Fermer">✕</button>
   <div id="lb-content">
@@ -835,220 +452,79 @@
 (function () {
   "use strict";
 
-  /* ===== NAV scroll ===== */
+  /* ===== NAV ===== */
   const mainNav = document.getElementById('main-nav');
-  window.addEventListener('scroll', () => {
-    mainNav.classList.toggle('scrolled', window.scrollY > 60);
-  }, { passive: true });
+  window.addEventListener('scroll', () => { mainNav.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
 
   /* ===== HAMBURGER ===== */
   const hamburger = document.getElementById('hamburger');
   const drawer    = document.getElementById('nav-drawer');
-
   function openDrawer()  { hamburger.classList.add('open'); hamburger.setAttribute('aria-expanded','true'); drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
   function closeDrawer() { hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
   hamburger.addEventListener('click', () => drawer.classList.contains('open') ? closeDrawer() : openDrawer());
   document.querySelectorAll('.drawer-link').forEach(l => l.addEventListener('click', closeDrawer));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeDrawer(); closeLightbox(); } });
 
-  /* ===== CHARGEMENT IMAGE + détection ratio ===== */
-  function adaptBox(box, img) {
-    const ratio = img.naturalHeight / img.naturalWidth;
-    box.classList.remove('portrait-box','landscape-box','square-box');
-    if (ratio > 1.3)      box.classList.add('portrait-box');
-    else if (ratio < 0.8) box.classList.add('landscape-box');
-    else                  box.classList.add('square-box');
+  /* ===== CHARGEMENT IMAGE SIMPLE ===== */
+  /*
+   * Stratégie : on assigne directement imgEl.src = url.
+   * Pas de probe intermédiaire — c'est ce qui bloquait les autres cartes.
+   */
+  function loadCardImage(card) {
+    const url     = card.dataset.img;
+    const imgEl   = card.querySelector('.concert-card-img');
+    const spinner = card.querySelector('.img-spinner');
+    if (!url || !imgEl) return;
+
+    imgEl.onload = function () {
+      imgEl.classList.add('visible');
+      if (spinner) spinner.classList.add('hidden');
+    };
+    imgEl.onerror = function () {
+      if (spinner) spinner.classList.add('hidden');
+    };
+    imgEl.src = url;   /* déclenchement immédiat */
   }
 
-  function loadImg(imgEl, url, box, placeholder, spinner) {
-    spinner && spinner.classList.remove('hidden');
-    imgEl.style.opacity = '0';
+  /* ===== SANDOUVILLE — cascade d'encodages ===== */
+  const SANDOU = [
+    'https://raw.githubusercontent.com/atoutvent76-ux/quintette-atout-vent/main/final%20%284%29%20.png',
+    'https://raw.githubusercontent.com/atoutvent76-ux/quintette-atout-vent/main/final%20%284%29.png',
+    'https://raw.githubusercontent.com/atoutvent76-ux/quintette-atout-vent/main/final%20(4)%20.png',
+    'https://raw.githubusercontent.com/atoutvent76-ux/quintette-atout-vent/main/final%20(4).png',
+    'https://raw.githubusercontent.com/atoutvent76-ux/quintette-atout-vent/main/final(4).png',
+    'https://raw.githubusercontent.com/atoutvent76-ux/quintette-atout-vent/main/final%204.png',
+    'https://raw.githubusercontent.com/atoutvent76-ux/quintette-atout-vent/main/final4.png'
+  ];
+
+  function trySandou(i) {
+    if (i >= SANDOU.length) {
+      document.getElementById('sandou-spinner').classList.add('hidden');
+      return;
+    }
     const probe = new Image();
     probe.onload = () => {
-      imgEl.src = url;
-      adaptBox(box, probe);
-      imgEl.classList.add('loaded');
-      placeholder && placeholder.classList.add('hidden');
-      spinner     && spinner.classList.add('hidden');
+      const card  = document.querySelector('[data-title="Église de Sandouville"]');
+      const img   = document.getElementById('img-sandou');
+      const spin  = document.getElementById('sandou-spinner');
+      card.dataset.img = SANDOU[i];          /* pour la lightbox */
+      img.onload = () => { img.classList.add('visible'); spin.classList.add('hidden'); };
+      img.src = SANDOU[i];
     };
-    probe.onerror = () => {
-      spinner && spinner.classList.add('hidden');
-      if (placeholder) placeholder.querySelector('span').textContent = 'Image non disponible';
-    };
-    probe.src = url;
+    probe.onerror = () => trySandou(i + 1);
+    probe.src = SANDOU[i];
   }
 
-  /* Cartes avec data-img direct */
-  document.querySelectorAll('.concert-card[data-img]').forEach(card => {
-    const url  = card.dataset.img;
-    const box  = card.querySelector('.img-box');
-    const img  = box.querySelector('.concert-card-img');
-    const plh  = box.querySelector('.img-placeholder');
-    const spin = box.querySelector('.img-spinner');
-    loadImg(img, url, box, plh, spin);
+  /* Lancer tous les chargements */
+  document.querySelectorAll('.concert-card').forEach(card => {
+    if (card.dataset.title === 'Église de Sandouville') {
+      trySandou(0);
+    } else {
+      loadCardImage(card);
+    }
   });
 
-  /* Sandouville — cascade d'URLs */
-  const sandouCard = document.querySelector('.concert-card[data-img-candidates]');
-  if (sandouCard) {
-    let candidates;
-    try { candidates = JSON.parse(sandouCard.dataset.imgCandidates); } catch(e) { candidates=[]; }
-    const img  = document.getElementById('img-sandou');
-    const box  = document.getElementById('box-sandou');
-    const plh  = document.getElementById('sandou-placeholder');
-    const spin = document.getElementById('sandou-spinner');
-
-    function tryNext(i) {
-      if (i >= candidates.length) {
-        spin.classList.add('hidden');
-        if (plh) plh.querySelector('span').textContent = 'Image non disponible';
-        return;
-      }
-      const probe = new Image();
-      probe.onload = () => {
-        sandouCard.dataset.img = candidates[i];
-        img.src = candidates[i];
-        adaptBox(box, probe);
-        img.classList.add('loaded');
-        plh  && plh.classList.add('hidden');
-        spin && spin.classList.add('hidden');
-      };
-      probe.onerror = () => tryNext(i + 1);
-      probe.src = candidates[i];
-    }
-    tryNext(0);
-  }
-
-  /* ===== PARTICULES AVANCÉES ===== */
-  const canvas = document.getElementById('particles-js');
-  const ctx    = canvas.getContext('2d');
-  let W, H, particles = [], mouse = { x: -9999, y: -9999 };
-
-  const COUNT      = 90;
-  const LINK_DIST  = 130;
-  const REPEL_R    = 110;
-  const ATTRACT_R  = 200;
-
-  class Particle {
-    constructor() { this.reset(true); }
-    reset(rand=false) {
-      this.x  = Math.random() * W;
-      this.y  = rand ? Math.random() * H : (Math.random() < .5 ? -4 : H + 4);
-      const s = 0.12 + Math.random() * 0.22;
-      const a = Math.random() * Math.PI * 2;
-      this.vx  = Math.cos(a) * s;
-      this.vy  = Math.sin(a) * s;
-      this.r   = 0.9 + Math.random() * 1.5;
-      this.alpha = 0.25 + Math.random() * 0.5;
-      /* Couleur : blanc ou or doux */
-      this.gold = Math.random() < 0.18;
-    }
-    update() {
-      const dx = this.x - mouse.x, dy = this.y - mouse.y;
-      const d2 = dx*dx + dy*dy;
-      const d  = Math.sqrt(d2);
-      if (d < REPEL_R && d > 0) {
-        const f = ((REPEL_R - d) / REPEL_R) * 0.7;
-        this.vx += (dx / d) * f;
-        this.vy += (dy / d) * f;
-      } else if (d < ATTRACT_R && d > REPEL_R) {
-        const f = ((d - REPEL_R) / (ATTRACT_R - REPEL_R)) * 0.04;
-        this.vx -= (dx / d) * f;
-        this.vy -= (dy / d) * f;
-      }
-      /* Légère turbulence */
-      this.vx += (Math.random() - .5) * 0.004;
-      this.vy += (Math.random() - .5) * 0.004;
-      /* Friction */
-      this.vx *= 0.993;
-      this.vy *= 0.993;
-      this.x  += this.vx;
-      this.y  += this.vy;
-      if (this.x < -12 || this.x > W+12 || this.y < -12 || this.y > H+12) this.reset(false);
-    }
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
-      if (this.gold)
-        ctx.fillStyle = `rgba(201,169,110,${this.alpha * 0.85})`;
-      else
-        ctx.fillStyle = `rgba(255,255,255,${this.alpha})`;
-      ctx.fill();
-    }
-  }
-
-  function initCanvas() {
-    const hero = document.getElementById('hero');
-    W = canvas.width  = hero.offsetWidth;
-    H = canvas.height = hero.offsetHeight;
-    particles = Array.from({ length: COUNT }, () => new Particle());
-  }
-
-  function drawLinks() {
-    for (let i = 0; i < particles.length; i++) {
-      const a = particles[i];
-      for (let j = i+1; j < particles.length; j++) {
-        const b = particles[j];
-        const dx = a.x - b.x, dy = a.y - b.y;
-        const d  = Math.sqrt(dx*dx + dy*dy);
-        if (d < LINK_DIST) {
-          const t = 1 - d/LINK_DIST;
-          /* Ligne or si les deux particules sont dorées */
-          const isGold = a.gold && b.gold;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          if (isGold)
-            ctx.strokeStyle = `rgba(201,169,110,${t * 0.35})`;
-          else
-            ctx.strokeStyle = `rgba(255,255,255,${t * 0.14})`;
-          ctx.lineWidth = t * 0.9;
-          ctx.stroke();
-        }
-      }
-    }
-  }
-
-  /* Halos autour du curseur */
-  function drawMouseHalo() {
-    if (mouse.x < 0) return;
-    const grd = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, REPEL_R);
-    grd.addColorStop(0,   'rgba(201,169,110,0.06)');
-    grd.addColorStop(.5,  'rgba(201,169,110,0.02)');
-    grd.addColorStop(1,   'rgba(201,169,110,0)');
-    ctx.beginPath();
-    ctx.arc(mouse.x, mouse.y, REPEL_R, 0, Math.PI*2);
-    ctx.fillStyle = grd;
-    ctx.fill();
-  }
-
-  let raf;
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    drawMouseHalo();
-    drawLinks();
-    particles.forEach(p => { p.update(); p.draw(); });
-    raf = requestAnimationFrame(render);
-  }
-
-  const hero = document.getElementById('hero');
-  hero.addEventListener('mousemove', e => {
-    const r = canvas.getBoundingClientRect();
-    mouse.x = e.clientX - r.left;
-    mouse.y = e.clientY - r.top;
-  });
-  hero.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
-
-  let resizeT;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeT);
-    resizeT = setTimeout(initCanvas, 140);
-  }, { passive: true });
-
-  initCanvas();
-  render();
-
-  /* ===== REVEAL ON SCROLL ===== */
+  /* ===== REVEAL ===== */
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); io.unobserve(e.target); } });
   }, { threshold: 0.07 });
@@ -1060,70 +536,100 @@
   const lbSpin = document.getElementById('lb-spinner');
   const lbTit  = document.getElementById('lb-title');
 
-  window.openLightbox = function(card) {
-    const url   = card.dataset.img || (card.querySelector('.concert-card-img') && card.querySelector('.concert-card-img').src) || '';
-    const title = card.dataset.title || '';
+  function openLightbox(card) {
+    const url = card.dataset.img;
     if (!url) return;
-
     lbImg.style.opacity = '0';
     lbSpin.classList.remove('hidden');
     lb.style.display = 'flex';
     requestAnimationFrame(() => lb.classList.add('active'));
     document.body.style.overflow = 'hidden';
-    lbTit.textContent = title;
-
-    lbImg.onload = () => {
-      lbSpin.classList.add('hidden');
-      lbImg.style.opacity = '1';
-      lb.classList.add('loaded');
-    };
+    lbTit.textContent = card.dataset.title || '';
+    lbImg.onload  = () => { lbSpin.classList.add('hidden'); lbImg.style.opacity='1'; lb.classList.add('loaded'); };
     lbImg.onerror = () => lbSpin.classList.add('hidden');
     lbImg.src = url;
-  };
+  }
 
-  window.closeLightbox = function() {
-    lb.classList.remove('active', 'loaded');
-    setTimeout(() => { lb.style.display = 'none'; lbImg.src = ''; }, 450);
+  function closeLightbox() {
+    lb.classList.remove('active','loaded');
+    setTimeout(() => { lb.style.display='none'; lbImg.src=''; }, 450);
     document.body.style.overflow = '';
-  };
+  }
+  window.closeLightbox = closeLightbox;
 
   document.getElementById('lb-close-btn').addEventListener('click', closeLightbox);
-  lb.addEventListener('click', e => { if (e.target === lb || e.target.id === 'lb-content') return; if (e.target === lb) closeLightbox(); });
   lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
-
-  /* Click sur les cartes */
   document.querySelectorAll('.concert-card').forEach(card => {
-    card.addEventListener('click', e => {
-      if (e.target.closest('.card-cta') || e.target.tagName === 'BUTTON') return;
-      openLightbox(card);
-    });
+    card.addEventListener('click', () => openLightbox(card));
   });
 
   let tsY = 0;
   lb.addEventListener('touchstart', e => { tsY = e.touches[0].clientY; }, { passive: true });
   lb.addEventListener('touchend',   e => { if (e.changedTouches[0].clientY - tsY > 60) closeLightbox(); }, { passive: true });
 
+  /* ===== PARTICULES ===== */
+  const canvas = document.getElementById('particles-js');
+  const ctx    = canvas.getContext('2d');
+  let W, H, parts = [], mouse = { x:-9999, y:-9999 };
+  const COUNT=80, LINK=120, REP=100, ATT=190;
+
+  class P {
+    constructor() { this.reset(true); }
+    reset(r) {
+      this.x=Math.random()*W; this.y=r?Math.random()*H:(Math.random()<.5?-4:H+4);
+      const s=.1+Math.random()*.2,a=Math.random()*Math.PI*2;
+      this.vx=Math.cos(a)*s; this.vy=Math.sin(a)*s;
+      this.r=.8+Math.random()*1.4; this.alpha=.2+Math.random()*.5;
+      this.gold=Math.random()<.18;
+    }
+    update() {
+      const dx=this.x-mouse.x,dy=this.y-mouse.y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<REP&&d>0){const f=((REP-d)/REP)*.7;this.vx+=(dx/d)*f;this.vy+=(dy/d)*f;}
+      else if(d<ATT&&d>REP){const f=((d-REP)/(ATT-REP))*.04;this.vx-=(dx/d)*f;this.vy-=(dy/d)*f;}
+      this.vx+=(Math.random()-.5)*.004; this.vy+=(Math.random()-.5)*.004;
+      this.vx*=.993; this.vy*=.993; this.x+=this.vx; this.y+=this.vy;
+      if(this.x<-12||this.x>W+12||this.y<-12||this.y>H+12)this.reset(false);
+    }
+    draw() {
+      ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+      ctx.fillStyle=this.gold?`rgba(201,169,110,${this.alpha*.85})`:`rgba(255,255,255,${this.alpha})`;
+      ctx.fill();
+    }
+  }
+
+  function initCanvas() {
+    const hero=document.getElementById('hero');
+    W=canvas.width=hero.offsetWidth; H=canvas.height=hero.offsetHeight;
+    parts=Array.from({length:COUNT},()=>new P());
+  }
+  function drawLinks() {
+    for(let i=0;i<parts.length;i++) for(let j=i+1;j<parts.length;j++){
+      const a=parts[i],b=parts[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<LINK){const t=1-d/LINK;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=(a.gold&&b.gold)?`rgba(201,169,110,${t*.3})`:`rgba(255,255,255,${t*.12})`;ctx.lineWidth=t*.8;ctx.stroke();}
+    }
+  }
+  function render(){ctx.clearRect(0,0,W,H);drawLinks();parts.forEach(p=>{p.update();p.draw();});requestAnimationFrame(render);}
+  const hero=document.getElementById('hero');
+  hero.addEventListener('mousemove',e=>{const r=canvas.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top;});
+  hero.addEventListener('mouseleave',()=>{mouse.x=-9999;mouse.y=-9999;});
+  let rT;window.addEventListener('resize',()=>{clearTimeout(rT);rT=setTimeout(initCanvas,140);},{passive:true});
+  initCanvas();render();
+
 })();
 </script>
 
-<!-- CURSEUR DESKTOP -->
 <script>
-(function () {
-  if (!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
-  const arrow = document.getElementById('cursor-arrow');
-  const hand  = document.getElementById('cursor-hand');
-  let rx = 0, ry = 0, cx = 0, cy = 0;
-  window.addEventListener('mousemove', e => { rx = e.clientX; ry = e.clientY; });
-  function moveCursor() {
-    cx += (rx - cx) * 0.18; cy += (ry - cy) * 0.18;
-    arrow.style.left = cx + 'px'; arrow.style.top = cy + 'px';
-    hand.style.left  = cx + 'px'; hand.style.top  = cy + 'px';
-    requestAnimationFrame(moveCursor);
-  }
-  moveCursor();
-  document.querySelectorAll('a, button, .concert-card').forEach(el => {
-    el.addEventListener('mouseenter', () => { arrow.style.display='none'; hand.style.display='block'; });
-    el.addEventListener('mouseleave', () => { arrow.style.display='block'; hand.style.display='none'; });
+(function(){
+  if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches)return;
+  const arrow=document.getElementById('cursor-arrow');
+  const hand=document.getElementById('cursor-hand');
+  let rx=0,ry=0,cx=0,cy=0;
+  window.addEventListener('mousemove',e=>{rx=e.clientX;ry=e.clientY;});
+  function mv(){cx+=(rx-cx)*.18;cy+=(ry-cy)*.18;arrow.style.left=cx+'px';arrow.style.top=cy+'px';hand.style.left=cx+'px';hand.style.top=cy+'px';requestAnimationFrame(mv);}
+  mv();
+  document.querySelectorAll('a,button,.concert-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{arrow.style.display='none';hand.style.display='block';});
+    el.addEventListener('mouseleave',()=>{arrow.style.display='block';hand.style.display='none';});
   });
 })();
 </script>
