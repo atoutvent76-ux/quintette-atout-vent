@@ -45,14 +45,14 @@
 
     .journal-book {
       width: 500px; 
-      height: 880px; /* Hauteur ajustée pour le texte long */
+      height: 850px; 
       position: relative;
       transform-style: preserve-3d;
       transition: transform var(--transit);
       cursor: pointer;
     }
 
-    /* Centrage dynamique à l'ouverture */
+    /* Centrage à l'ouverture */
     .journal-book.is-open {
       transform: translateX(250px);
     }
@@ -64,13 +64,12 @@
       background-image: url("https://www.transparenttextures.com/patterns/old-paper.png");
       padding: 35px;
       backface-visibility: hidden;
-      transition: transform var(--transit), box-shadow var(--transit);
+      transition: transform var(--transit);
       border: 1px solid rgba(0,0,0,0.1);
       display: flex;
       flex-direction: column;
     }
 
-    /* COUVERTURE */
     .page-front {
       z-index: 3;
       transform-origin: left;
@@ -84,7 +83,6 @@
       box-shadow: none;
     }
 
-    /* PAGES INTÉRIEURES */
     .page-left {
       z-index: 2;
       transform: rotateY(-180deg);
@@ -106,16 +104,16 @@
     /* ── STYLE GAZETTE ── */
     .gazette-header { border-bottom: 5px double var(--ink); margin-bottom: 15px; width: 100%; text-align: center;}
     .gazette-meta { display: flex; justify-content: space-between; text-transform: uppercase; font-size: 0.65rem; font-weight: 700; border-bottom: 1px solid var(--ink); padding: 4px 0; margin-bottom: 10px; }
-    .gazette-title { font-size: 3.2rem; color: var(--teal2); font-weight: 700; line-height: 0.9; margin: 15px 0; text-transform: uppercase; }
+    .gazette-title { font-size: 3rem; color: var(--teal2); font-weight: 700; line-height: 1; margin: 15px 0; text-transform: uppercase; }
     
-    .headline { font-size: 1.5rem; font-weight: 700; color: var(--teal2); line-height: 1.1; margin-bottom: 12px; text-align: center; border-bottom: 2px solid var(--ink); padding-bottom: 6px; font-style: italic;}
+    .headline { font-size: 1.4rem; font-weight: 700; color: var(--teal2); line-height: 1.1; margin-bottom: 12px; text-align: center; border-bottom: 2px solid var(--ink); padding-bottom: 6px; font-style: italic;}
     
-    .article-text { font-size: 0.95rem; line-height: 1.4; text-align: justify; hyphens: auto; color: var(--ink); overflow-y: auto; padding-right: 5px; }
-    .article-text p { margin-bottom: 10px; }
+    .article-text { font-size: 0.95rem; line-height: 1.4; text-align: justify; color: var(--ink); }
+    .article-text p { margin-bottom: 8px; }
 
-    .photo-raw { width: 100%; height: auto; display: block; margin: 10px 0; border: 1px solid rgba(0,0,0,0.1); }
+    .photo-raw { width: 100%; height: auto; display: block; margin: 10px 0; border: 1px solid rgba(0,0,0,0.15); }
 
-    .drop-cap::first-letter { float: left; font-size: 3.2rem; line-height: 0.7; padding-right: 8px; font-weight: 700; color: var(--gold); }
+    .drop-cap::first-letter { float: left; font-size: 3rem; line-height: 0.7; padding-right: 8px; font-weight: 700; color: var(--gold); }
 
     .open-btn {
       margin-top: auto; font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 3px;
@@ -123,10 +121,6 @@
       background: none; transition: all 0.3s;
     }
     .journal-book:hover .open-btn { background: var(--ink); color: var(--paper); }
-
-    /* Scrollbar discrète */
-    .article-text::-webkit-scrollbar { width: 3px; }
-    .article-text::-webkit-scrollbar-thumb { background: var(--gold); }
 
     @media (max-width: 1100px) {
       .journal-book { width: 90vw; height: 85vh; transform: none !important; }
@@ -149,14 +143,14 @@
     
     <div class="page page-front">
       <div class="gazette-header">
-        <div class="gazette-meta"><span>Normandie</span><span>Édition 2026</span></div>
+        <div class="gazette-meta"><span>Normandie</span><span>Avril 2026</span></div>
         <h1 class="gazette-title">LA CHRONIQUE <br> DES VENTS</h1>
       </div>
-      <div style="width: 55%; margin: auto; display: flex; align-items: center;">
+      <div style="width: 50%; margin: auto; display: flex; align-items: center;">
         <img src="logo atout vent.svg" alt="Logo Quintette Atout Vent" style="width: 100%;">
       </div>
       <p style="font-style: italic; margin-bottom: 20px;">"L'excellence musicale à travers les âges"</p>
-      <div class="open-btn">Ouvrir l'édition</div>
+      <div class="open-btn">Feuilleter l'édition</div>
     </div>
 
     <div class="page page-left">
@@ -165,32 +159,32 @@
       </div>
       <h2 class="headline">Le quintette Atout vent a soufflé ses notes dans l'église</h2>
       <div class="article-text drop-cap">
-        <p style="font-weight: 700; color: var(--teal2); margin-bottom: 5px; text-transform: uppercase;">Sandouville</p>
+        <p style="font-weight: 700; color: var(--teal2); margin-bottom: 5px; text-transform: uppercase; font-size: 0.8rem;">Sandouville</p>
         <img src="CC 2026_04_03 (2)_page-0001.jpg" alt="Concert à Sandouville" class="photo-raw">
         <p>
-          L'association culturelle La Hêtraie, située à Saint-Romain-de-Colbosc, a proposé dimanche 29 mars, un concert de musique classique à l'église de Sandouville, permettant, par la même occasion, aux auditeurs de découvrir l'intérieur cet édifice religieux. Le quintette Atout vent, formé en 2024 au Havre, et composé de hautbois, flûte, basson, cor et clarinette, a repris l'ouverture de <i>La Flûte enchantée</i> de Mozart. 
+          L'association culturelle La Hêtraie, située à Saint-Romain-de-Colbosc, a proposé dimanche 29 mars, un concert de musique classique à l'église de Sandouville, permettant, par la même occasion, aux auditeurs de découvrir l'intérieur cet édifice religieux. Le quintette Atout vent, formé en 2024 au Havre, et composé de hautbois, flûte, basson, cor et clarinette, a repris l'ouverture de La Flûte enchantée de Mozart.
         </p>
         <p>
-          L'ensemble musical a réussi à remplir l'église et à ravir les oreilles de son auditoire. L'objectif de ce concert était à la fois d'amener un large public à la musique de chambre et de promouvoir le patrimoine architectural de la région. L'association La Hêtraie propose d'ailleurs régulièrement des manifestations à Saint-Romain-de-Colbosc et dans les communes environnantes, que ce soit sous forme de conférences à thème, de concerts, de visites guidées et autres sorties patrimoniales, visant à mettre en lumière les bijoux architecturaux trop souvent ignorés du plus grand nombre.
+          L'ensemble musical a réussi à remplir l'église et à ravir les oreilles de son auditoire. L'objectif de ce concert était à la fois d'amener un large public à la musique de chambre et de promouvoir le patrimoine architectural de la région. L'association La Hêtraie propose d'ailleurs régulièrement des manifestations visant à mettre en lumière les bijoux architecturaux trop souvent ignorés du plus grand nombre.
         </p>
       </div>
     </div>
 
     <div class="page page-right">
       <div class="gazette-header">
-        <div class="gazette-meta"><span>Événements Culturels</span><span>Article 2</span></div>
+        <div class="gazette-meta"><span>Événements</span><span>Article 2</span></div>
       </div>
-      <h2 class="headline">Concert Atout Vent à l'Abbaye de Graville</h2>
+      <h2 class="headline">Concert Atout Vent</h2>
       <div class="article-text drop-cap">
         <img src="IMG_20260415_0003.jpg" alt="Abbaye de Graville" class="photo-raw">
         <p>
-          L'événement se déroulera dimanche 12 avril à l'Abbaye de Graville. En guise de prélude, de 14 h à 18 h, une rencontre avec le luthier François Bonnet permettra de découvrir les métiers d'art. À 15 h, un concert mettra à l'honneur des pièces italiennes et espagnoles, suivi d'un autre à 16 h composé de duos anglais des XVIe et XVIIe siècles.
+          Le Concert Atout Vent mettra en scène un quintette à vent avec un programme musical célébrant le printemps. Les spectateurs pourront écouter des extraits de Peer Gynt, Mozart, Tchaïkovski, Debussy et Fauré.
         </p>
         <p>
-          Le Concert Atout Vent mettra en scène un quintette à vent célébrant le printemps avec des extraits de Peer Gynt, Mozart, Tchaïkovski, Debussy et Fauré. Rendez-vous samedi 25 avril à 15 h 30 pour une durée d'une heure avec entracte. L'entrée est gratuite avec participation libre au profit d'Atout Vent. Réservations conseillées.
+          Rendez-vous samedi 25 avril à 15 h 30. Durée : 1 heure avec entracte. Entrée gratuite, avec participation libre en fin de concert au profit d'Atout Vent. Réservations conseillées.
         </p>
       </div>
-      <p style="text-align: center; margin-top: auto; font-size: 0.75rem; font-style: italic; opacity: 0.6;">Cliquez pour refermer l'édition</p>
+      <p style="text-align: center; margin-top: auto; font-size: 0.7rem; font-style: italic; opacity: 0.5;">Cliquer pour refermer</p>
     </div>
 
   </div>
