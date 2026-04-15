@@ -8,32 +8,33 @@
   <style>
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
     :root{
-      --teal2:#1a2d4a;
+      --teal2:#1a2d4a; /* Consitency with main site */
       --gold:#c9a96e;
-      --paper:#e8e4d5;
-      --ink:#2b2b2b;
-      --cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
+      --paper:#e8e4d5; /* Authentic aged paper tone */
+      --ink:#1a1a1a;   /* Deep ink black */
     }
 
     body {
-      background-color: #111;
+      background-color: #222; /* External environment */
       color: var(--ink);
       font-family: 'Cormorant Garamond', serif;
       overflow-x: hidden;
       min-height: 100vh;
+      line-height: 1.5;
     }
 
-    /* ── NAVIGATION ── */
+    /* ── NAVIGATION (Identité visuelle conservée) ── */
     nav {
       position: fixed; top: 0; width: 100%; z-index: 1000;
       display: flex; justify-content: space-between; align-items: center;
       padding: 1rem 5%; background: var(--teal2); border-bottom: 2px solid var(--gold);
     }
-    .logo { text-decoration: none; color: #fff; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+    .logo-nav { text-decoration: none; color: #fff; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-family: 'Montserrat', sans-serif; font-size: 0.8rem;}
     .nav-links { display: flex; gap: 1.5rem; list-style: none; }
-    .nav-links a { color: #fff; text-decoration: none; font-family: 'Montserrat'; font-size: 0.7rem; text-transform: uppercase; }
+    .nav-links a { color: #fff; text-decoration: none; font-family: 'Montserrat', sans-serif; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px;}
+    .nav-links a.active { color: var(--gold); }
 
-    /* ── STRUCTURE 3D AMÉLIORÉE ── */
+    /* ── STRUCTURE 3D JOURNAL ── */
     .journal-scene {
       perspective: 3000px;
       display: flex;
@@ -44,124 +45,126 @@
     }
 
     .journal-book {
-      width: 500px; 
-      height: 780px;
+      width: 550px; /* Largeur page fermée */
+      height: 800px;
       position: relative;
       transform-style: preserve-3d;
-      transition: transform 1.8s var(--cubic);
+      transition: transform 1.8s cubic-bezier(0.645, 0.045, 0.355, 1);
       cursor: pointer;
+      /* Simple border for the object itself */
+      border: 1px solid #c0b9a0;
     }
 
-    /* Centrage et légère inclinaison au repos */
-    .journal-book { transform: rotateX(5deg) rotateY(-5deg); }
-
+    /* Centrage lors de l'ouverture */
     .journal-book.is-open {
-      transform: rotateX(0deg) rotateY(0deg) translateX(250px);
+      transform: translateX(275px);
     }
 
     .page {
       position: absolute;
       inset: 0;
       background: var(--paper);
-      background-image: url("https://www.transparenttextures.com/patterns/old-paper.png");
-      padding: 35px;
-      border: 1px solid #c0b9a0;
+      background-image: url("https://www.transparenttextures.com/patterns/old-paper.png"); /* Subtile texture fibre */
+      padding: 40px;
       backface-visibility: hidden;
-      transition: transform 1.8s var(--cubic), box-shadow 1.8s var(--cubic);
+      transition: transform 1.8s cubic-bezier(0.645, 0.045, 0.355, 1);
     }
 
-    /* COUVERTURE */
+    /* COUVERTURE (Une) */
     .page-front {
       z-index: 3;
       transform-origin: left;
       display: flex;
       flex-direction: column;
       align-items: center;
-      text-align: center;
-      box-shadow: 15px 5px 30px rgba(0,0,0,0.5);
+      border-right: 2px solid rgba(0,0,0,0.2); /* Pliure visible */
     }
 
     .journal-book.is-open .page-front {
       transform: rotateY(-180deg);
-      box-shadow: 0 0 5px rgba(0,0,0,0);
     }
 
-    /* PAGE GAUCHE (Intérieur avec effet de pli) */
+    /* PAGE GAUCHE (Intérieur) */
     .page-left {
       z-index: 2;
       transform: rotateY(-180deg);
       transform-origin: left;
-      background: linear-gradient(to right, var(--paper) 92%, rgba(0,0,0,0.15) 100%);
+      border-right: none;
+      /* Ombre de pliure interne */
+      background: linear-gradient(to right, var(--paper) 95%, rgba(0,0,0,0.1) 100%);
     }
 
     .journal-book.is-open .page-left {
       transform: rotateY(0deg) translateX(-100%);
-      box-shadow: -15px 10px 40px rgba(0,0,0,0.4);
     }
 
-    /* PAGE DROITE (Fixe avec effet de pli) */
+    /* PAGE DROITE (Intérieur fixe) */
     .page-right {
       z-index: 1;
-      background: linear-gradient(to left, var(--paper) 92%, rgba(0,0,0,0.15) 100%);
-      box-shadow: 15px 10px 40px rgba(0,0,0,0.4);
+      border-left: 1px solid rgba(0,0,0,0.1);
+      /* Ombre de pliure interne */
+      background: linear-gradient(to left, var(--paper) 95%, rgba(0,0,0,0.1) 100%);
     }
 
-    /* ── TYPOGRAPHIE & MISE EN PAGE JOURNAL ── */
-    .gazette-header { border-bottom: 4px double var(--ink); margin-bottom: 20px; width: 100%; }
-    .gazette-meta { display: flex; justify-content: space-between; text-transform: uppercase; font-size: 0.65rem; font-weight: 700; border-bottom: 1px solid var(--ink); padding: 5px 0; margin-bottom: 10px; }
-    .gazette-title { font-size: 4rem; color: var(--teal2); font-weight: 700; line-height: 0.85; margin: 20px 0; text-transform: uppercase; filter: drop-shadow(1px 1px 0px rgba(0,0,0,0.1)); }
+    /* ── STYLE GAZETTE ANCIENNE (Rien de superflu) ── */
+    .gazette-header { border-bottom: 5px double var(--ink); margin-bottom: 25px; width: 100%; text-align: center;}
+    .gazette-meta { display: flex; justify-content: space-between; text-transform: uppercase; font-size: 0.7rem; font-weight: 700; border-bottom: 1px solid var(--ink); padding: 5px 0; margin-bottom: 15px; }
+    .gazette-title { font-size: 4.5rem; color: var(--teal2); font-weight: 700; line-height: 0.8; margin: 20px 0; text-transform: uppercase; letter-spacing: -2px;}
     
-    .headline { font-size: 1.9rem; font-weight: 700; color: var(--teal2); line-height: 1.1; margin-bottom: 15px; text-align: center; border-bottom: 1px solid var(--ink); padding-bottom: 8px; }
+    .headline { font-size: 2.2rem; font-weight: 700; color: var(--teal2); line-height: 1; margin-bottom: 15px; text-align: center; border-bottom: 2px solid var(--ink); padding-bottom: 8px; font-style: italic;}
     
     .article-text { 
       font-size: 1.15rem; 
-      line-height: 1.4; 
+      line-height: 1.45; 
       text-align: justify; 
-      hyphens: auto; 
-      color: #1a1a1a;
+      hyphens: auto; /* Césures automatiques pour justification stricte */
+      color: var(--ink);
     }
 
-    /* Traitement Image "Encre & Papier" */
+    /* Traitement Image Brute (Pas de filtre) */
     .photo-frame {
       border: 1px solid var(--ink); 
-      padding: 3px; 
+      padding: 2px; 
       background: #fff; 
       margin: 15px 0;
-      box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+      display: block;
     }
     .photo-frame img {
       width: 100%; 
-      filter: sepia(0.4) grayscale(1) contrast(1.2) brightness(0.9);
-      mix-blend-mode: multiply; /* Fusion avec la texture papier */
       display: block;
-      opacity: 0.9;
+      /* Aucun filtre appliqué */
     }
-    .caption { font-size: 0.8rem; font-style: italic; text-align: center; margin-top: 5px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 5px; }
+    .caption { font-size: 0.85rem; font-style: italic; text-align: center; margin-top: 8px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 5px; color: #444; }
 
+    /* Lettrine Ornée */
     .drop-cap::first-letter { 
       float: left; font-size: 4.2rem; line-height: 0.7; 
-      padding-right: 10px; font-weight: 700; color: var(--gold); 
-      text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+      padding-right: 12px; font-weight: 700; color: var(--gold); 
     }
 
-    .btn-hint {
-      margin-top: auto; font-family: 'Montserrat'; font-size: 0.6rem; letter-spacing: 3px;
-      border: 1px solid var(--ink); padding: 10px 18px; text-transform: uppercase;
-      background: rgba(255,255,255,0.2); transition: all 0.3s;
+    .open-btn {
+      margin-top: auto; font-family: 'Montserrat', sans-serif; font-size: 0.65rem; letter-spacing: 3px;
+      border: 1px solid var(--ink); padding: 12px 20px; text-transform: uppercase;
+      background: none; color: var(--ink); transition: all 0.3s;
     }
-    .journal-book:hover .btn-hint { background: var(--ink); color: var(--paper); }
+    .journal-book:hover .open-btn { background: var(--ink); color: var(--paper); }
 
-    @media (max-width: 1100px) {
-      .journal-book { width: 90vw; height: 75vh; }
+    /* Footer journal */
+    .journal-footer {
+      margin-top: auto; border-top: 1px solid var(--ink); padding-top: 10px; width: 100%; text-align: center; font-style: italic; font-size: 0.8rem;
+    }
+
+    @media (max-width: 1150px) {
+      .journal-book { width: 90vw; height: 80vh; border: none; transform: none;}
       .journal-book.is-open { transform: none; }
-      .page-left { display: none; }
+      .page-left { display: none; } /* Simplification mobile */
     }
   </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="logo">Quintette Atout Vent</a>
+  <a href="index.html" class="logo-nav">Atout Vent</a>
   <ul class="nav-links">
     <li><a href="index.html">Accueil</a></li>
     <li><a href="presse.html" class="active">La Gazette</a></li>
@@ -174,50 +177,53 @@
     <div class="page page-front">
       <div class="gazette-header">
         <div class="gazette-meta">
-          <span>Édition de Normandie</span>
+          <span>Journal Régional de Normandie</span>
           <span>Avril 2026</span>
         </div>
+        <h1 class="gazette-title">LA CHRONIQUE <br> DES VENTS</h1>
       </div>
-      <h1 class="gazette-title">LA CHRONIQUE <br> DES VENTS</h1>
-      <div class="photo-frame" style="width: 85%; margin: 30px 0;">
-        <img src="IMG_20260415_0003.jpg" alt="Aperçu Gazette">
+
+      <div style="width: 60%; margin: 40px 0; flex-grow: 1; display: flex; align-items: center; justify-content: center;">
+        <img src="logo atout vent.svg" alt="Logo Quintette Atout Vent" style="width: 100%; height: auto; display: block;">
       </div>
-      <p style="font-style: italic; color: var(--gold); font-size: 1.1rem; letter-spacing: 1px;">"L'excellence musicale à travers les âges"</p>
-      <div class="btn-hint">Ouvrir le journal</div>
+      
+      <p style="font-style: italic; color: var(--ink); font-size: 1.2rem; margin-bottom: 30px;">"L'excellence musicale à travers les âges"</p>
+      
+      <div class="open-btn">Ouvrir l'édition</div>
     </div>
 
     <div class="page page-left">
       <div class="gazette-header">
-        <div class="gazette-meta"><span>Chroniques</span><span>Archive n°01</span></div>
+        <div class="gazette-meta"><span>Chroniques Locales</span><span>Archive n°01</span></div>
       </div>
-      <h2 class="headline">Le quintette Atout vent a soufflé ses notes</h2>
+      <h2 class="headline">Le quintette a soufflé ses notes dans l’église</h2>
       <div class="article-text drop-cap">
         <div class="photo-frame">
-          <img src="CC 2026_04_03 (2)_page-0001.jpg" alt="Sandouville">
-          <p class="caption">Sandouville : Concert de l'ensemble Atout Vent.</p>
+          <img src="CC 2026_04_03 (2)_page-0001.jpg" alt="Concert à Sandouville">
+          <p class="caption">Le quintette Atout Vent en représentation.</p>
         </div>
-        L’association culturelle La Hêtraie a proposé un concert mémorable à l’église de Sandouville. 
-        Le quintette, formé au Havre, a interprété l’ouverture de <i>La Flûte enchantée</i> de Mozart avec une virtuosité saluée par l'auditoire. 
-        Un moment de grâce qui a magnifié le patrimoine architectural local.
+        L’association culturelle La Hêtraie a proposé un concert de musique classique à l’église de Sandouville. 
+        Le quintette Atout vent, composé de hautbois, flûte, basson, cor et clarinette, a repris l’ouverture de <i>La Flûte enchantée</i> de Mozart. 
+        L'ensemble a réussi à ravir les oreilles de son auditoire dans un cadre historique magnifique.
       </div>
     </div>
 
     <div class="page page-right">
       <div class="gazette-header">
-        <div class="gazette-meta"><span>Événements</span><span>Archive n°02</span></div>
+        <div class="gazette-meta"><span>Événements Culturels</span><span>Archive n°02</span></div>
       </div>
-      <h2 class="headline">Le Printemps de Graville</h2>
+      <h2 class="headline">Mélodies Printanières à Graville</h2>
       <div class="article-text drop-cap">
         <div class="photo-frame">
-          <img src="IMG_20260415_0003.jpg" alt="Graville">
+          <img src="IMG_20260415_0003.jpg" alt="Abbaye de Graville">
           <p class="caption">L'abbaye de Graville, écrin de l'événement.</p>
         </div>
-        L'Abbaye de Graville accueillera un programme printanier d'exception. 
+        L'Abbaye de Graville accueillera un programme célébrant le printemps. 
         Le public pourra découvrir des extraits de Peer Gynt, Mozart, et Tchaïkovski. 
-        En prélude, une rencontre avec le luthier François Bonnet mettra à l'honneur les métiers d'art.
+        En prélude, une rencontre avec le luthier François Bonnet mettra à l'honneur les métiers d'art locaux.
       </div>
-      <div style="text-align: center; margin-top: 30px; font-size: 0.7rem; opacity: 0.5; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 10px;">
-        Cliquez pour refermer la gazette
+      <div class="journal-footer">
+        Cliquez sur la page de gauche pour refermer.
       </div>
     </div>
 
@@ -225,6 +231,7 @@
 </div>
 
 <script>
+  /* GESTION DE L'OUVERTURE DU JOURNAL */
   const journal = document.getElementById('journal');
   journal.addEventListener('click', () => {
     journal.classList.toggle('is-open');
