@@ -7,13 +7,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    
+
     :root {
-      --teal2: #1a2d4a; 
-      --gold: #c9a96e;
-      --paper: #e4decb; 
-      --ink: #111111;   
-      --transit: 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+      --nav-h: 52px;
+      --teal2: #1a2d4a;
+      --gold:  #c9a96e;
+      --paper: #e8e1cc;
+      --ink:   #111111;
+      --transit: 1.1s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden; /* ← Interdit le scroll de page */
     }
 
     body {
@@ -21,45 +27,56 @@
       color: var(--ink);
       font-family: 'Cormorant Garamond', serif;
       overflow-x: hidden;
-      min-height: 100vh;
-      user-select: none; 
+      user-select: none;
     }
 
     /* ── NAVIGATION ── */
     nav {
       position: fixed; top: 0; width: 100%; z-index: 1000;
+      height: var(--nav-h);
       display: flex; justify-content: space-between; align-items: center;
-      padding: 1rem 5%; background: var(--teal2); border-bottom: 2px solid var(--gold);
+      padding: 0 5%;
+      background: var(--teal2);
+      border-bottom: 2px solid var(--gold);
     }
-    .logo-nav { text-decoration: none; color: #fff; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-family: 'Montserrat', sans-serif; font-size: 0.8rem;}
+    .logo-nav {
+      text-decoration: none; color: #fff; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 2px;
+      font-family: 'Montserrat', sans-serif; font-size: 0.8rem;
+    }
     .nav-links { display: flex; gap: 1.5rem; list-style: none; }
-    .nav-links a { color: #fff; text-decoration: none; font-family: 'Montserrat', sans-serif; font-size: 0.7rem; text-transform: uppercase; }
+    .nav-links a {
+      color: #fff; text-decoration: none;
+      font-family: 'Montserrat', sans-serif; font-size: 0.7rem; text-transform: uppercase;
+    }
 
-    /* ── MOTEUR 3D DU JOURNAL ── */
+    /* ── SCÈNE 3D — remplit exactement la fenêtre sous la nav ── */
     .journal-scene {
+      position: fixed;
+      top: var(--nav-h);
+      left: 0; right: 0; bottom: 0;
       perspective: 2500px;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      padding: 120px 20px 60px;
-      touch-action: pan-y; 
+      overflow: hidden;
     }
 
+    /* ── LIVRE ── */
     .book {
+      --bh: min(calc(100vh - var(--nav-h) - 32px), 820px);
+      --bw: calc(var(--bh) * 0.57);
+
       position: relative;
-      width: 480px; 
-      height: 850px; /* AGRANDI POUR LE TEXTE */
+      width: var(--bw);
+      height: var(--bh);
       transform-style: preserve-3d;
       transition: transform var(--transit);
       transform: rotateX(2deg) translateX(0);
       cursor: grab;
     }
     .book:active { cursor: grabbing; }
-
-    .book.is-open {
-      transform: rotateX(2deg) translateX(240px);
-    }
+    .book.is-open { transform: rotateX(2deg) translateX(calc(var(--bw) / 2)); }
 
     .leaf {
       position: absolute;
@@ -72,75 +89,178 @@
 
     .face {
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0; left: 0; right: 0; bottom: 0;
       background-color: var(--paper);
-      background-image: 
+      background-image:
         url("https://www.transparenttextures.com/patterns/aged-paper.png"),
-        repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px);
-      backface-visibility: hidden; 
+        repeating-linear-gradient(0deg, transparent 0px, transparent 2px,
+          rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px);
+      backface-visibility: hidden;
       border: 1px solid rgba(0,0,0,0.15);
-      padding: 35px 40px;
+
+      /* Flexbox colonne : header + contenu scrollable */
       display: flex;
       flex-direction: column;
+      padding: clamp(18px, 3vh, 30px) clamp(20px, 4%, 36px);
+      overflow: hidden; /* Empêche le débordement hors page */
     }
 
-    .face.front {
-      transform: rotateY(0deg);
-      background-blend-mode: multiply;
-      box-shadow: inset 15px 0 20px -10px rgba(0,0,0,0.1);
-    }
-    .face.back {
-      transform: rotateY(180deg);
-      box-shadow: inset -15px 0 20px -10px rgba(0,0,0,0.1);
-    }
-
-    .leaf.turned { transform: rotateY(-180deg); }
+    .face.front { transform: rotateY(0deg);   box-shadow: inset 15px 0 20px -10px rgba(0,0,0,0.1); }
+    .face.back  { transform: rotateY(180deg); box-shadow: inset -15px 0 20px -10px rgba(0,0,0,0.1); }
 
     #leaf1 { z-index: 3; }
     #leaf2 { z-index: 2; }
     #leaf3 { z-index: 1; box-shadow: 10px 10px 30px rgba(0,0,0,0.5); }
-    .leaf.turned { box-shadow: -10px 10px 30px rgba(0,0,0,0.3); }
+    .leaf.turned { transform: rotateY(-180deg); box-shadow: -10px 10px 30px rgba(0,0,0,0.3); }
 
     /* ── TYPOGRAPHIE GAZETTE ── */
-    .gazette-header { border-bottom: 4px double var(--ink); margin-bottom: 20px; text-align: center; width: 100%; flex-shrink: 0;}
-    .gazette-meta { display: flex; justify-content: space-between; text-transform: uppercase; font-size: 0.65rem; font-weight: 700; border-bottom: 1px solid var(--ink); padding: 5px 0; margin-bottom: 10px; }
-    
-    .gazette-title { font-size: 3.2rem; color: var(--teal2); font-weight: 700; line-height: 0.9; margin: 15px 0; text-transform: uppercase; }
-    .headline { font-size: 1.5rem; font-weight: 700; color: var(--ink); line-height: 1.1; margin-bottom: 15px; text-align: center; font-style: italic; flex-shrink: 0;}
-    
-    /* SYSTÈME DE SCROLL INTERNE POUR LES LONGS TEXTES */
-    .article-text { 
-      font-size: 0.95rem; /* Ajusté pour laisser respirer */
-      line-height: 1.4; 
-      text-align: justify; 
-      color: var(--ink); 
-      hyphens: auto;
-      overflow-y: auto; /* Permet de scroller le texte */
-      flex-grow: 1;
-      padding-right: 10px; /* Espace pour la barre de scroll */
+    .gazette-header {
+      border-bottom: 4px double var(--ink);
+      margin-bottom: clamp(10px, 1.5vh, 18px);
+      text-align: center;
+      flex-shrink: 0;
     }
-    .article-text p { margin-bottom: 12px; }
+    .gazette-meta {
+      display: flex; justify-content: space-between;
+      text-transform: uppercase; font-size: 0.62rem; font-weight: 700;
+      border-bottom: 1px solid var(--ink);
+      padding: 4px 0; margin-bottom: 8px;
+    }
 
-    /* Scrollbar personnalisée */
-    .article-text::-webkit-scrollbar { width: 4px; }
+    .gazette-title {
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      color: var(--teal2); font-weight: 700;
+      line-height: 0.9; margin: 12px 0 8px;
+      text-transform: uppercase;
+    }
+
+    .gazette-subtitle {
+      font-style: italic;
+      font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+      margin-bottom: 6px;
+      opacity: 0.75;
+    }
+
+    .headline {
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      font-weight: 700; color: var(--ink);
+      line-height: 1.15; margin-bottom: clamp(8px, 1.5vh, 14px);
+      text-align: center; font-style: italic;
+      flex-shrink: 0;
+    }
+
+    /* ── ZONE TEXTE : prend l'espace disponible, scroll interne discret ── */
+    .article-text {
+      font-size: clamp(0.78rem, 1.4vw, 0.9rem);
+      line-height: 1.45;
+      text-align: justify;
+      color: var(--ink);
+      hyphens: auto;
+      flex-grow: 1;       /* Remplit l'espace restant */
+      overflow-y: auto;   /* Scroll interne seulement si nécessaire */
+      padding-right: 6px;
+    }
+    .article-text p { margin-bottom: 10px; }
+    .article-text p:last-child { margin-bottom: 0; }
+
+    /* Scrollbar fine et dorée */
+    .article-text::-webkit-scrollbar { width: 3px; }
     .article-text::-webkit-scrollbar-track { background: transparent; }
-    .article-text::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
+    .article-text::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
 
-    .photo-raw { width: 100%; height: auto; max-height: 400px; object-fit: contain; display: block; margin: auto; border: 1px solid rgba(0,0,0,0.2); }
+    /* ── DROP CAP ── */
+    .drop-cap::first-letter {
+      float: left;
+      font-size: clamp(2.5rem, 6vh, 3.5rem);
+      line-height: 0.7;
+      padding-right: 10px; padding-top: 4px;
+      font-weight: 700; color: var(--teal2);
+    }
 
-    .drop-cap::first-letter { float: left; font-size: 3.5rem; line-height: 0.7; padding-right: 12px; padding-top: 5px; font-weight: 700; color: var(--ink); }
+    .location-label {
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 1.2px;
+      margin-bottom: 8px !important;
+      color: var(--teal2);
+    }
 
-    .hint { margin-top: 15px; text-align: center; font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.5; flex-shrink: 0;}
+    /* ── PHOTO ── */
+    .photo-raw {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .photo-container {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.15);
+    }
+
+    /* ── LOGO COUVERTURE ── */
+    .cover-logo {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cover-logo img { width: 68%; }
+
+    /* ── INDICE NAVIGATION ── */
+    .hint {
+      margin-top: 10px; text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.58rem; letter-spacing: 2px;
+      text-transform: uppercase; opacity: 0.45;
+      flex-shrink: 0;
+    }
+
+    /* ── SÉPARATEUR ARTICLE ── */
+    .article-sep {
+      border: none;
+      border-top: 1px solid rgba(0,0,0,0.25);
+      margin: 12px 0;
+    }
 
     /* ── RESPONSIVE MOBILE ── */
-    @media (max-width: 1050px) {
-      .journal-scene { display: block; padding-top: 100px; background: var(--paper); touch-action: auto;}
-      .book { width: 100%; height: auto; transform: none !important; perspective: none; }
-      .leaf { position: relative; width: 100%; height: auto; transform: none !important; display: block; }
-      .face { position: relative; width: 100%; height: auto; transform: none !important; border: none; border-bottom: 2px solid var(--ink); padding: 30px 15px; box-shadow: none !important; }
+    @media (max-width: 800px) {
+      html, body { overflow: auto; }
+      .journal-scene {
+        position: static;
+        display: block;
+        padding: calc(var(--nav-h) + 16px) 0 32px;
+        background: var(--paper);
+      }
+      .book {
+        --bw: 100%;
+        --bh: auto;
+        width: 100%; height: auto;
+        transform: none !important;
+        box-shadow: none;
+      }
+      .leaf {
+        position: relative;
+        width: 100%; height: auto;
+        transform: none !important;
+        display: block;
+      }
+      .face {
+        position: relative;
+        width: 100%; height: auto;
+        transform: none !important;
+        border: none;
+        border-bottom: 2px solid rgba(0,0,0,0.2);
+        padding: 24px 16px;
+        box-shadow: none !important;
+        overflow: visible;
+      }
+      .article-text { overflow-y: visible; padding-right: 0; }
       .hint { display: none; }
-      .article-text { overflow-y: visible; padding-right: 0;} /* Pas besoin de scroll sur mobile */
+      .photo-container { min-height: 220px; }
     }
   </style>
 </head>
@@ -150,126 +270,154 @@
   <a href="index.html" class="logo-nav">Atout Vent</a>
   <ul class="nav-links">
     <li><a href="index.html">Accueil</a></li>
-    <li><a href="presse.html" class="active">La Gazette</a></li>
+    <li><a href="presse.html">La Gazette</a></li>
   </ul>
 </nav>
 
 <div class="journal-scene">
   <div class="book" id="book">
-    
+
+    <!-- ═══════════════════════════════════════ FEUILLE 1 ══ -->
     <div class="leaf" id="leaf1">
+
+      <!-- PAGE 1 : Couverture -->
       <div class="face front">
         <div class="gazette-header">
-          <div class="gazette-meta"><span>Édition Spéciale</span><span>Normandie 2026</span></div>
-          <h1 class="gazette-title">LA CHRONIQUE <br> DES VENTS</h1>
+          <div class="gazette-meta">
+            <span>Édition Spéciale</span>
+            <span>Normandie 2026</span>
+          </div>
+          <h1 class="gazette-title">LA CHRONIQUE<br>DES VENTS</h1>
         </div>
-        <div style="flex-grow:1; display:flex; align-items:center; justify-content:center;">
-          <img src="logo atout vent.svg" alt="Logo Atout Vent" style="width: 70%;">
+        <div class="cover-logo">
+          <img src="logo atout vent.svg" alt="Logo Atout Vent">
         </div>
-        <p style="font-style: italic; text-align: center; margin-bottom: 20px;">"L'excellence musicale havraise"</p>
-        <div class="hint">Cliquez ou glissez pour ouvrir</div>
+        <p class="gazette-subtitle">"L'excellence musicale havraise"</p>
+        <div class="hint">Cliquez ou glissez pour ouvrir →</div>
       </div>
-      
-      <div class="face back">
-        <div class="gazette-header"><div class="gazette-meta"><span>Chroniques Locales</span><span>Article 1</span></div></div>
-        <h2 class="headline">Le quintette Atout vent à soufflé ses notes dans l'église</h2>
-        <div class="article-text drop-cap">
-          <p style="text-transform: uppercase; font-weight: bold; font-size: 0.8rem; letter-spacing: 1px;">Sandouville</p>
-          <p>L'association culturelle La Hêtraie, située à Saint-Romain-de-Colbosc, a proposé dimanche 29 mars, un concert de musique classique à l'église de Sandouville, permettant, par la même occasion, aux auditeurs de découvrir l'intérieur cet édifice religieux.</p>
-          <p>Le quintette Atout vent, formé en 2024 au Havre, et composé de hautbois, flûte, basson, cor et clarinette, a repris l'ouverture de La Flûte enchantée de Mozart. L'ensemble musical a réussi à remplir l'église et à ravir les oreilles de son auditoire.</p>
-          <p>L'objectif de ce concert était à la fois d'amener un large public à la musique de chambre et de promouvoir le patrimoine architectural de la région. L'association La Hêtraie propose d'ailleurs régulièrement, des manifestations à Saint-Romain-de-Colbosc et dans les communes environnantes, que ce soit sous forme de conférences à thème, de concerts, de visites guidées et autres sorties patrimoniales, de biennales de peinture, de sculpture ou toute autre forme d'expression artistique, visant à mettre en lumière les bijoux architecturaux trop souvent ignorés du plus grand nombre.</p>
-        </div>
-      </div>
-    </div>
 
+      <!-- PAGE 2 : Article 1 -->
+      <div class="face back">
+        <div class="gazette-header">
+          <div class="gazette-meta">
+            <span>Chroniques Locales</span>
+            <span>Article 1</span>
+          </div>
+        </div>
+        <h2 class="headline">Le quintette Atout vent a soufflé ses notes dans l'église</h2>
+        <div class="article-text">
+          <p class="location-label drop-cap">Sandouville</p>
+          <p>L'association culturelle La Hêtraie, située à Saint-Romain-de-Colbosc, a proposé dimanche 29 mars un concert de musique classique à l'église de Sandouville, permettant, par la même occasion, aux auditeurs de découvrir l'intérieur de cet édifice religieux.</p>
+          <p>Le quintette Atout vent, formé en 2024 au Havre et composé de hautbois, flûte, basson, cor et clarinette, a repris l'ouverture de <em>La Flûte enchantée</em> de Mozart. L'ensemble musical a réussi à remplir l'église et à ravir les oreilles de son auditoire.</p>
+          <p>L'objectif de ce concert était à la fois d'amener un large public à la musique de chambre et de promouvoir le patrimoine architectural de la région. L'association La Hêtraie propose d'ailleurs régulièrement des manifestations à Saint-Romain-de-Colbosc et dans les communes environnantes, que ce soit sous forme de conférences à thème, de concerts, de visites guidées et autres sorties patrimoniales, de biennales de peinture, de sculpture ou toute autre forme d'expression artistique, visant à mettre en lumière les bijoux architecturaux trop souvent ignorés du plus grand nombre.</p>
+        </div>
+      </div>
+
+    </div><!-- /leaf1 -->
+
+    <!-- ═══════════════════════════════════════ FEUILLE 2 ══ -->
     <div class="leaf" id="leaf2">
+
+      <!-- PAGE 3 : Photo concert Sandouville -->
       <div class="face front">
-        <div class="gazette-header"><div class="gazette-meta"><span>Illustration</span><span>Archive 01</span></div></div>
-        <div style="flex-grow:1; display:flex; align-items:center;">
+        <div class="gazette-header">
+          <div class="gazette-meta">
+            <span>Illustration</span>
+            <span>Archive 01</span>
+          </div>
+        </div>
+        <div class="photo-container">
           <img src="CC 2026_04_03 (2)_page-0001.jpg" alt="Concert Sandouville" class="photo-raw">
         </div>
-        <div class="hint">Cliquez à droite pour avancer</div>
+        <div class="hint">← Retour &nbsp;|&nbsp; Avancer →</div>
       </div>
 
+      <!-- PAGE 4 : Article 2 -->
       <div class="face back">
-        <div class="gazette-header"><div class="gazette-meta"><span>Événements Culturels</span><span>Article 2</span></div></div>
+        <div class="gazette-header">
+          <div class="gazette-meta">
+            <span>Événements Culturels</span>
+            <span>Article 2</span>
+          </div>
+        </div>
         <h2 class="headline">Concert Atout Vent à l'Abbaye de Graville</h2>
         <div class="article-text drop-cap">
-          <p>... à cordes pincées. L'événement se déroulera dimanche 12 avril. En guise de prélude, de 14 h à 18 h, une rencontre avec le luthier François Bonnet permettra de découvrir les métiers d'art. À 15 h, un concert mettra à l'honneur des pièces italiennes et espagnoles, suivi d'un autre concert à 16 h, composé de duos autour de compositeurs anglais des XVIe et XVIIe siècles. L'événement est gratuit, mais il est conseillé de réserver pour les concerts.</p>
-          <p style="text-transform: uppercase; font-weight: bold; font-size: 0.8rem; letter-spacing: 1px; margin-top: 20px;">Concert Atout Vent</p>
-          <p>Le Concert Atout Vent mettra en scène un quintette à vent avec un programme musical célébrant le printemps. Les spectateurs pourront écouter des extraits de Peer Gynt, Mozart, Tchaïkovski, Debussy et Fauré. Rendez-vous samedi 25 avril à 15 h 30. Durée : 1 heure avec entracte. Entrée gratuite, avec participation libre en fin de concert au profit d'Atout Vent. Réservations conseillées.</p>
+          <p>Le Concert Atout Vent mettra en scène un quintette à vent avec un programme musical célébrant le printemps. Les spectateurs pourront écouter des extraits de <em>Peer Gynt</em>, Mozart, Tchaïkovski, Debussy et Fauré.</p>
+          <p>Rendez-vous <strong>samedi 25 avril à 15 h 30</strong>. Durée : 1 heure avec entracte. Entrée gratuite, avec participation libre en fin de concert au profit d'Atout Vent.</p>
+          <p>Réservations conseillées.</p>
         </div>
       </div>
-    </div>
 
+    </div><!-- /leaf2 -->
+
+    <!-- ═══════════════════════════════════════ FEUILLE 3 ══ -->
     <div class="leaf" id="leaf3">
+
+      <!-- PAGE 5 : Photo Abbaye de Graville -->
       <div class="face front">
-        <div class="gazette-header"><div class="gazette-meta"><span>Illustration</span><span>Archive 02</span></div></div>
-        <div style="flex-grow:1; display:flex; align-items:center;">
+        <div class="gazette-header">
+          <div class="gazette-meta">
+            <span>Illustration</span>
+            <span>Archive 02</span>
+          </div>
+        </div>
+        <div class="photo-container">
           <img src="IMG_20260415_0003.jpg" alt="Abbaye de Graville" class="photo-raw">
         </div>
-        <div class="hint">Cliquez à gauche pour refermer</div>
+        <div class="hint">← Retour pour refermer</div>
       </div>
-      <div class="face back"></div>
-    </div>
 
-  </div>
-</div>
+      <!-- PAGE 6 : Dos vide (quatrième de couverture) -->
+      <div class="face back" style="justify-content:center; align-items:center;">
+        <p style="font-size:1.2rem; font-style:italic; opacity:0.4; text-align:center;">
+          Fin de la gazette
+        </p>
+      </div>
+
+    </div><!-- /leaf3 -->
+
+  </div><!-- /book -->
+</div><!-- /journal-scene -->
 
 <script>
-  const book = document.getElementById('book');
-  const maxPages = 2; // Index max : 0 (fermé), 1 (double page 1), 2 (double page 2)
-  let currentPage = 0;
+  const book    = document.getElementById('book');
+  const maxPage = 2;
+  let page      = 0;
 
-  function updateBook() {
-    if (currentPage === 0) {
-      book.classList.remove('is-open');
-      document.getElementById('leaf1').classList.remove('turned');
-      document.getElementById('leaf2').classList.remove('turned');
-    } else if (currentPage === 1) {
-      book.classList.add('is-open');
-      document.getElementById('leaf1').classList.add('turned');
-      document.getElementById('leaf2').classList.remove('turned');
-    } else if (currentPage === 2) {
-      book.classList.add('is-open');
-      document.getElementById('leaf1').classList.add('turned');
-      document.getElementById('leaf2').classList.add('turned');
-    }
+  function render() {
+    const l1 = document.getElementById('leaf1');
+    const l2 = document.getElementById('leaf2');
+    book.classList.toggle('is-open', page > 0);
+    l1.classList.toggle('turned', page >= 1);
+    l2.classList.toggle('turned', page >= 2);
   }
 
-  let startX = 0;
-  let isDragging = false;
+  /* ── Pointeur (souris + tactile) ── */
+  let startX = 0, dragging = false;
 
-  document.addEventListener('pointerdown', (e) => {
-    // Si on clique dans la zone de texte pour la faire défiler, on annule le changement de page
-    if(e.target.closest('.article-text')) return;
-    if(!e.target.closest('.journal-scene')) return;
-    startX = e.clientX;
-    isDragging = true;
+  document.addEventListener('pointerdown', e => {
+    if (e.target.closest('.article-text')) return; // laisser scroller le texte
+    if (!e.target.closest('.journal-scene')) return;
+    startX   = e.clientX;
+    dragging = true;
   });
 
-  document.addEventListener('pointerup', (e) => {
-    if (!isDragging) return;
-    isDragging = false;
-    
-    let diff = e.clientX - startX;
+  document.addEventListener('pointerup', e => {
+    if (!dragging) return;
+    dragging = false;
 
-    // Détection Swipe
-    if (diff > 50) { 
-      if(currentPage > 0) currentPage--;
-    } else if (diff < -50) {
-      if(currentPage < maxPages) currentPage++;
-    } 
-    // Détection Clic
-    else {
-      if (e.clientX > window.innerWidth / 2) {
-        if(currentPage < maxPages) currentPage++;
-      } else {
-        if(currentPage > 0) currentPage--;
-      }
+    const diff = e.clientX - startX;
+
+    if (Math.abs(diff) > 50) {
+      /* Swipe */
+      if (diff > 0 && page > 0)        page--;
+      if (diff < 0 && page < maxPage)  page++;
+    } else {
+      /* Clic */
+      if (e.clientX > window.innerWidth / 2) { if (page < maxPage) page++; }
+      else                                    { if (page > 0)       page--; }
     }
-    
-    updateBook();
+    render();
   });
 </script>
 
