@@ -12,7 +12,7 @@
       --gold:#c9a96e;
       --paper:#e8e4d5; 
       --ink:#1a1a1a;   
-      --transit: 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+      --transit: 1.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     body {
@@ -40,19 +40,31 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      padding: 100px 20px 40px;
+      padding: 100px 20px 60px;
     }
 
     .journal-book {
-      width: 500px; 
-      height: 820px; 
+      width: 450px; /* Largeur d'une page */
+      height: 750px; 
       position: relative;
       transform-style: preserve-3d;
       transition: transform var(--transit);
+      /* Centrage initial */
+      transform: rotateX(5deg);
     }
 
-    /* États d'ouverture */
-    .journal-book.is-open { transform: translateX(250px); }
+    .journal-book.is-open {
+      transform: rotateX(0deg) translateX(225px); /* Décale de la moitié pour centrer la double page */
+    }
+
+    /* ── STRUCTURE DES FEUILLES ── */
+    .leaf {
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+      transform-origin: left;
+      transition: transform var(--transit);
+    }
 
     .page {
       position: absolute;
@@ -61,34 +73,35 @@
       background-image: url("https://www.transparenttextures.com/patterns/old-paper.png");
       padding: 30px;
       backface-visibility: hidden;
-      transition: transform var(--transit), box-shadow var(--transit);
       border: 1px solid rgba(0,0,0,0.1);
       display: flex;
       flex-direction: column;
-      transform-origin: left;
     }
 
-    /* Ordre des pages */
-    .p-cover { z-index: 5; } 
-    .p-sandouville-txt { z-index: 4; transform: rotateY(-180deg); background: linear-gradient(to right, var(--paper) 94%, rgba(0,0,0,0.08) 100%); }
-    .p-sandouville-img { z-index: 3; background: linear-gradient(to left, var(--paper) 94%, rgba(0,0,0,0.08) 100%); }
-    .p-graville-txt { z-index: 2; transform: rotateY(-180deg); background: linear-gradient(to right, var(--paper) 94%, rgba(0,0,0,0.08) 100%); }
-    .p-graville-img { z-index: 1; border-left: none; background: linear-gradient(to left, var(--paper) 94%, rgba(0,0,0,0.08) 100%); }
+    /* Le verso d'une feuille doit être retourné à 180° */
+    .page.back {
+      transform: rotateY(-180deg);
+      background: linear-gradient(to right, var(--paper) 95%, rgba(0,0,0,0.1) 100%);
+    }
 
-    /* Animations de tourne */
-    .journal-book.is-open .p-cover { transform: rotateY(-180deg); }
-    .journal-book.second-page .p-sandouville-img { transform: rotateY(-180deg); }
+    .page.front {
+      background: linear-gradient(to left, var(--paper) 95%, rgba(0,0,0,0.1) 100%);
+    }
 
-    /* ── STYLE TEXTES ── */
-    .gazette-header { border-bottom: 4px double var(--ink); margin-bottom: 15px; text-align: center; width: 100%;}
-    .gazette-meta { display: flex; justify-content: space-between; text-transform: uppercase; font-size: 0.6rem; font-weight: 700; border-bottom: 1px solid var(--ink); padding: 3px 0; margin-bottom: 8px; }
-    .gazette-title { font-size: 2.8rem; color: var(--teal2); font-weight: 700; line-height: 0.9; margin: 10px 0; text-transform: uppercase; }
+    /* ── ANIMATIONS DE TOURNE ── */
+    .leaf.turned {
+      transform: rotateY(-180deg);
+    }
+
+    /* ── STYLE GAZETTE ── */
+    .gazette-header { border-bottom: 5px double var(--ink); margin-bottom: 15px; text-align: center; width: 100%;}
+    .gazette-meta { display: flex; justify-content: space-between; text-transform: uppercase; font-size: 0.6rem; font-weight: 700; border-bottom: 1px solid var(--ink); padding: 3px 0; margin-bottom: 10px; }
+    .gazette-title { font-size: 2.5rem; color: var(--teal2); font-weight: 700; line-height: 1; margin: 10px 0; text-transform: uppercase; }
     .headline { font-size: 1.3rem; font-weight: 700; color: var(--teal2); text-align: center; border-bottom: 1px solid var(--ink); padding-bottom: 5px; margin-bottom: 10px; font-style: italic;}
-    .article-text { font-size: 0.9rem; line-height: 1.4; text-align: justify; color: var(--ink); }
-    .photo-raw { width: 100%; height: auto; margin: auto; border: 1px solid rgba(0,0,0,0.1); }
+    .article-text { font-size: 0.95rem; line-height: 1.4; text-align: justify; color: var(--ink); }
+    .photo-raw { width: 100%; height: auto; border: 1px solid rgba(0,0,0,0.1); }
     .drop-cap::first-letter { float: left; font-size: 3rem; line-height: 0.7; padding-right: 8px; font-weight: 700; color: var(--gold); }
 
-    /* ── BOUTONS ── */
     .nav-btn {
       margin-top: auto; font-family: 'Montserrat', sans-serif; font-size: 0.55rem; letter-spacing: 2px;
       border: 1px solid var(--ink); padding: 8px 15px; text-transform: uppercase;
@@ -97,16 +110,13 @@
     .nav-btn:hover { background: var(--ink); color: var(--paper); }
 
     /* ── ADAPTATION MOBILE ── */
-    @media (max-width: 1100px) {
-      .journal-scene { display: block; padding-top: 100px; background: var(--paper); }
+    @media (max-width: 1000px) {
+      .journal-scene { display: block; padding-top: 80px; }
       .journal-book { width: 100%; height: auto; transform: none !important; }
-      .page { 
-        position: relative; width: 100%; height: auto; transform: none !important; 
-        box-shadow: none !important; border: none; border-bottom: 1px solid #ccc;
-        padding: 40px 20px;
-      }
-      .page-1-back, .page-2-back { transform: none; }
-      .nav-btn, .open-btn { display: none; } /* On retire les boutons en mode scroll vertical */
+      .leaf { position: relative; transform: none !important; display: block; }
+      .page { position: relative; transform: none !important; height: auto; padding: 40px 20px; border-bottom: 2px solid #ccc; }
+      .page.back { transform: none !important; }
+      .nav-btn { display: none; }
     }
   </style>
 </head>
@@ -121,67 +131,85 @@
 </nav>
 
 <div class="journal-scene">
-  <div class="journal-book" id="journal">
+  <div class="journal-book" id="book">
     
-    <div class="page p-cover">
-      <div class="gazette-header">
-        <div class="gazette-meta"><span>Normandie</span><span>Avril 2026</span></div>
-        <h1 class="gazette-title">LA CHRONIQUE <br> DES VENTS</h1>
+    <div class="leaf" id="leaf1" style="z-index: 3;">
+      <div class="page front">
+        <div class="gazette-header">
+          <div class="gazette-meta"><span>Normandie</span><span>Avril 2026</span></div>
+          <h1 class="gazette-title">LA CHRONIQUE <br> DES VENTS</h1>
+        </div>
+        <div style="flex-grow:1; display:flex; align-items:center; justify-content:center;">
+          <img src="logo atout vent.svg" alt="Logo" style="width: 70%;">
+        </div>
+        <button class="nav-btn" onclick="openJournal()">Ouvrir l'édition</button>
       </div>
-      <div style="flex-grow:1; display:flex; align-items:center; justify-content:center;">
-        <img src="logo atout vent.svg" alt="Logo Atout Vent" style="width: 60%;">
+      <div class="page back">
+        <div class="gazette-header"><div class="gazette-meta"><span>Page 1</span><span>Chroniques</span></div></div>
+        <h2 class="headline">Le quintette Atout vent a soufflé ses notes dans l'église</h2>
+        <div class="article-text drop-cap">
+          <p>L'association culturelle La Hêtraie, située à Saint-Romain-de-Colbosc, a proposé dimanche 29 mars, un concert mémorable à l'église de Sandouville.</p>
+          <p>Le quintette Atout vent a repris l'ouverture de <i>La Flûte enchantée</i> de Mozart. L'objectif était de ravir les oreilles de l'auditoire tout en mettant en lumière les bijoux architecturaux de notre région.</p>
+        </div>
+        <button class="nav-btn" onclick="closeJournal()">Refermer</button>
       </div>
-      <p style="text-align:center; font-style:italic; margin-bottom:20px;">"L'excellence musicale à travers les âges"</p>
-      <button class="nav-btn" onclick="openJournal()">Ouvrir l'édition</button>
     </div>
 
-    <div class="page p-sandouville-txt">
-      <div class="gazette-header">
-        <div class="gazette-meta"><span>Chroniques</span><span>Article 1</span></div>
+    <div class="leaf" id="leaf2" style="z-index: 2;">
+      <div class="page front">
+        <div class="gazette-header"><div class="gazette-meta"><span>Illustration</span><span>Article 1</span></div></div>
+        <div style="flex-grow:1; display:flex; align-items:center;">
+          <img src="CC 2026_04_03 (2)_page-0001.jpg" alt="Sandouville" class="photo-raw">
+        </div>
+        <button class="nav-btn" onclick="nextPage()">Suivant →</button>
       </div>
-      <h2 class="headline">Le quintette Atout vent a soufflé ses notes dans l'église</h2>
-      <div class="article-text drop-cap">
-        <p style="font-weight:700; color:var(--teal2); text-transform:uppercase; font-size:0.75rem;">Sandouville</p>
-        <p>L'association culturelle La Hêtraie, située à Saint-Romain-de-Colbosc, a proposé dimanche 29 mars, un concert de musique classique à l'église de Sandouville, permettant aux auditeurs de découvrir l'intérieur de cet édifice religieux.</p>
-        <p>Le quintette Atout vent, formé en 2024 au Havre, a repris l'ouverture de <i>La Flûte enchantée</i> de Mozart. L'objectif était de promouvoir le patrimoine architectural tout en ravivant la musique de chambre.</p>
+      <div class="page back">
+        <div class="gazette-header"><div class="gazette-meta"><span>Page 2</span><span>Événements</span></div></div>
+        <h2 class="headline">Concert Atout Vent</h2>
+        <div class="article-text drop-cap">
+          <p>Le Concert Atout Vent mettra en scène un quintette à vent avec un programme musical célébrant le printemps (Mozart, Tchaïkovski, Debussy...).</p>
+          <p>Rendez-vous samedi 25 avril à 15 h 30. Entrée gratuite, participation libre au profit de l'ensemble. Réservations conseillées.</p>
+        </div>
+        <button class="nav-btn" onclick="prevPage()">← Précédent</button>
       </div>
-      <button class="nav-btn" onclick="closeJournal()">Refermer</button>
     </div>
 
-    <div class="page p-sandouville-img">
-      <div class="gazette-header"><div class="gazette-meta"><span>Illustration</span><span>Sandouville</span></div></div>
-      <img src="CC 2026_04_03 (2)_page-0001.jpg" alt="Article Sandouville" class="photo-raw">
-      <button class="nav-btn" onclick="turnPage()">Page Suivante →</button>
-    </div>
-
-    <div class="page p-graville-txt">
-      <div class="gazette-header">
-        <div class="gazette-meta"><span>Événements</span><span>Article 2</span></div>
+    <div class="leaf" id="leaf3" style="z-index: 1;">
+      <div class="page front">
+        <div class="gazette-header"><div class="gazette-meta"><span>Illustration</span><span>Article 2</span></div></div>
+        <div style="flex-grow:1; display:flex; align-items:center;">
+          <img src="IMG_20260415_0003.jpg" alt="Graville" class="photo-raw">
+        </div>
+        <p style="text-align:center; font-style:italic; font-size:0.8rem; margin-top:10px;">Fin de l'édition — 2026</p>
       </div>
-      <h2 class="headline">Concert Atout Vent</h2>
-      <div class="article-text drop-cap">
-        <p>Le Concert Atout Vent mettra en scène un quintette avec un programme célébrant le printemps : Peer Gynt, Mozart, Tchaïkovski, Debussy et Fauré.</p>
-        <p>Rendez-vous samedi 25 avril à 15 h 30. Durée : 1 heure avec entracte. Entrée gratuite, participation libre au profit d'Atout Vent. Réservations conseillées.</p>
-      </div>
-      <button class="nav-btn" onclick="backPage()">← Page Précédente</button>
-    </div>
-
-    <div class="page p-graville-img">
-      <div class="gazette-header"><div class="gazette-meta"><span>Illustration</span><span>Graville</span></div></div>
-      <img src="IMG_20260415_0003.jpg" alt="Abbaye de Graville" class="photo-raw">
-      <button class="nav-btn" onclick="closeJournal()">Refermer l'édition</button>
     </div>
 
   </div>
 </div>
 
 <script>
-  const book = document.getElementById('journal');
+  const book = document.getElementById('book');
+  const l1 = document.getElementById('leaf1');
+  const l2 = document.getElementById('leaf2');
 
-  function openJournal() { book.classList.add('is-open'); }
-  function closeJournal() { book.classList.remove('is-open', 'second-page'); }
-  function turnPage() { book.classList.add('second-page'); }
-  function backPage() { book.classList.remove('second-page'); }
+  function openJournal() {
+    book.classList.add('is-open');
+    l1.classList.add('turned');
+  }
+
+  function closeJournal() {
+    book.classList.remove('is-open');
+    l1.classList.remove('turned');
+    l2.classList.remove('turned');
+  }
+
+  function nextPage() {
+    l2.classList.add('turned');
+  }
+
+  function prevPage() {
+    l2.classList.remove('turned');
+  }
 </script>
 
 </body>
