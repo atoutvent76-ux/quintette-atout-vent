@@ -12,7 +12,7 @@
       --gold:#c9a96e;
       --paper:#e8e4d5; 
       --ink:#1a1a1a;   
-      --transit: 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+      --transit: 1.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     body {
@@ -40,91 +40,73 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      padding: 120px 20px 60px;
+      padding: 100px 20px 40px;
     }
 
     .journal-book {
       width: 500px; 
-      height: 850px; 
+      height: 820px; 
       position: relative;
       transform-style: preserve-3d;
       transition: transform var(--transit);
-      cursor: pointer;
     }
 
-    /* Centrage à l'ouverture */
-    .journal-book.is-open {
-      transform: translateX(250px);
-    }
+    /* États d'ouverture */
+    .journal-book.is-open { transform: translateX(250px); }
 
     .page {
       position: absolute;
       inset: 0;
       background: var(--paper);
       background-image: url("https://www.transparenttextures.com/patterns/old-paper.png");
-      padding: 35px;
+      padding: 30px;
       backface-visibility: hidden;
-      transition: transform var(--transit);
+      transition: transform var(--transit), box-shadow var(--transit);
       border: 1px solid rgba(0,0,0,0.1);
       display: flex;
       flex-direction: column;
-    }
-
-    .page-front {
-      z-index: 3;
       transform-origin: left;
-      align-items: center;
-      text-align: center;
-      box-shadow: 15px 5px 30px rgba(0,0,0,0.5);
     }
 
-    .journal-book.is-open .page-front {
-      transform: rotateY(-180deg);
-      box-shadow: none;
-    }
+    /* Ordre des pages */
+    .p-cover { z-index: 5; } 
+    .p-sandouville-txt { z-index: 4; transform: rotateY(-180deg); background: linear-gradient(to right, var(--paper) 94%, rgba(0,0,0,0.08) 100%); }
+    .p-sandouville-img { z-index: 3; background: linear-gradient(to left, var(--paper) 94%, rgba(0,0,0,0.08) 100%); }
+    .p-graville-txt { z-index: 2; transform: rotateY(-180deg); background: linear-gradient(to right, var(--paper) 94%, rgba(0,0,0,0.08) 100%); }
+    .p-graville-img { z-index: 1; border-left: none; background: linear-gradient(to left, var(--paper) 94%, rgba(0,0,0,0.08) 100%); }
 
-    .page-left {
-      z-index: 2;
-      transform: rotateY(-180deg);
-      transform-origin: left;
-      background: linear-gradient(to right, var(--paper) 94%, rgba(0,0,0,0.1) 100%);
-    }
+    /* Animations de tourne */
+    .journal-book.is-open .p-cover { transform: rotateY(-180deg); }
+    .journal-book.second-page .p-sandouville-img { transform: rotateY(-180deg); }
 
-    .journal-book.is-open .page-left {
-      transform: rotateY(0deg) translateX(-100%);
-      box-shadow: -15px 10px 30px rgba(0,0,0,0.3);
-    }
-
-    .page-right {
-      z-index: 1;
-      background: linear-gradient(to left, var(--paper) 94%, rgba(0,0,0,0.1) 100%);
-      box-shadow: 15px 10px 30px rgba(0,0,0,0.3);
-    }
-
-    /* ── STYLE GAZETTE ── */
-    .gazette-header { border-bottom: 5px double var(--ink); margin-bottom: 15px; width: 100%; text-align: center;}
-    .gazette-meta { display: flex; justify-content: space-between; text-transform: uppercase; font-size: 0.65rem; font-weight: 700; border-bottom: 1px solid var(--ink); padding: 4px 0; margin-bottom: 10px; }
-    .gazette-title { font-size: 3rem; color: var(--teal2); font-weight: 700; line-height: 1; margin: 15px 0; text-transform: uppercase; }
-    
-    .headline { font-size: 1.4rem; font-weight: 700; color: var(--teal2); line-height: 1.1; margin-bottom: 12px; text-align: center; border-bottom: 2px solid var(--ink); padding-bottom: 6px; font-style: italic;}
-    
-    .article-text { font-size: 0.95rem; line-height: 1.4; text-align: justify; color: var(--ink); }
-    .article-text p { margin-bottom: 8px; }
-
-    .photo-raw { width: 100%; height: auto; display: block; margin: 10px 0; border: 1px solid rgba(0,0,0,0.15); }
-
+    /* ── STYLE TEXTES ── */
+    .gazette-header { border-bottom: 4px double var(--ink); margin-bottom: 15px; text-align: center; width: 100%;}
+    .gazette-meta { display: flex; justify-content: space-between; text-transform: uppercase; font-size: 0.6rem; font-weight: 700; border-bottom: 1px solid var(--ink); padding: 3px 0; margin-bottom: 8px; }
+    .gazette-title { font-size: 2.8rem; color: var(--teal2); font-weight: 700; line-height: 0.9; margin: 10px 0; text-transform: uppercase; }
+    .headline { font-size: 1.3rem; font-weight: 700; color: var(--teal2); text-align: center; border-bottom: 1px solid var(--ink); padding-bottom: 5px; margin-bottom: 10px; font-style: italic;}
+    .article-text { font-size: 0.9rem; line-height: 1.4; text-align: justify; color: var(--ink); }
+    .photo-raw { width: 100%; height: auto; margin: auto; border: 1px solid rgba(0,0,0,0.1); }
     .drop-cap::first-letter { float: left; font-size: 3rem; line-height: 0.7; padding-right: 8px; font-weight: 700; color: var(--gold); }
 
-    .open-btn {
-      margin-top: auto; font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 3px;
-      border: 1px solid var(--ink); padding: 10px 18px; text-transform: uppercase;
-      background: none; transition: all 0.3s;
+    /* ── BOUTONS ── */
+    .nav-btn {
+      margin-top: auto; font-family: 'Montserrat', sans-serif; font-size: 0.55rem; letter-spacing: 2px;
+      border: 1px solid var(--ink); padding: 8px 15px; text-transform: uppercase;
+      background: none; cursor: pointer; align-self: center; transition: 0.3s;
     }
-    .journal-book:hover .open-btn { background: var(--ink); color: var(--paper); }
+    .nav-btn:hover { background: var(--ink); color: var(--paper); }
 
+    /* ── ADAPTATION MOBILE ── */
     @media (max-width: 1100px) {
-      .journal-book { width: 90vw; height: 85vh; transform: none !important; }
-      .page-left { display: none; }
+      .journal-scene { display: block; padding-top: 100px; background: var(--paper); }
+      .journal-book { width: 100%; height: auto; transform: none !important; }
+      .page { 
+        position: relative; width: 100%; height: auto; transform: none !important; 
+        box-shadow: none !important; border: none; border-bottom: 1px solid #ccc;
+        padding: 40px 20px;
+      }
+      .page-1-back, .page-2-back { transform: none; }
+      .nav-btn, .open-btn { display: none; } /* On retire les boutons en mode scroll vertical */
     }
   </style>
 </head>
@@ -141,60 +123,65 @@
 <div class="journal-scene">
   <div class="journal-book" id="journal">
     
-    <div class="page page-front">
+    <div class="page p-cover">
       <div class="gazette-header">
         <div class="gazette-meta"><span>Normandie</span><span>Avril 2026</span></div>
         <h1 class="gazette-title">LA CHRONIQUE <br> DES VENTS</h1>
       </div>
-      <div style="width: 50%; margin: auto; display: flex; align-items: center;">
-        <img src="logo atout vent.svg" alt="Logo Quintette Atout Vent" style="width: 100%;">
+      <div style="flex-grow:1; display:flex; align-items:center; justify-content:center;">
+        <img src="logo atout vent.svg" alt="Logo Atout Vent" style="width: 60%;">
       </div>
-      <p style="font-style: italic; margin-bottom: 20px;">"L'excellence musicale à travers les âges"</p>
-      <div class="open-btn">Feuilleter l'édition</div>
+      <p style="text-align:center; font-style:italic; margin-bottom:20px;">"L'excellence musicale à travers les âges"</p>
+      <button class="nav-btn" onclick="openJournal()">Ouvrir l'édition</button>
     </div>
 
-    <div class="page page-left">
+    <div class="page p-sandouville-txt">
       <div class="gazette-header">
         <div class="gazette-meta"><span>Chroniques</span><span>Article 1</span></div>
       </div>
       <h2 class="headline">Le quintette Atout vent a soufflé ses notes dans l'église</h2>
       <div class="article-text drop-cap">
-        <p style="font-weight: 700; color: var(--teal2); margin-bottom: 5px; text-transform: uppercase; font-size: 0.8rem;">Sandouville</p>
-        <img src="CC 2026_04_03 (2)_page-0001.jpg" alt="Concert à Sandouville" class="photo-raw">
-        <p>
-          L'association culturelle La Hêtraie, située à Saint-Romain-de-Colbosc, a proposé dimanche 29 mars, un concert de musique classique à l'église de Sandouville, permettant, par la même occasion, aux auditeurs de découvrir l'intérieur cet édifice religieux. Le quintette Atout vent, formé en 2024 au Havre, et composé de hautbois, flûte, basson, cor et clarinette, a repris l'ouverture de La Flûte enchantée de Mozart.
-        </p>
-        <p>
-          L'ensemble musical a réussi à remplir l'église et à ravir les oreilles de son auditoire. L'objectif de ce concert était à la fois d'amener un large public à la musique de chambre et de promouvoir le patrimoine architectural de la région. L'association La Hêtraie propose d'ailleurs régulièrement des manifestations visant à mettre en lumière les bijoux architecturaux trop souvent ignorés du plus grand nombre.
-        </p>
+        <p style="font-weight:700; color:var(--teal2); text-transform:uppercase; font-size:0.75rem;">Sandouville</p>
+        <p>L'association culturelle La Hêtraie, située à Saint-Romain-de-Colbosc, a proposé dimanche 29 mars, un concert de musique classique à l'église de Sandouville, permettant aux auditeurs de découvrir l'intérieur de cet édifice religieux.</p>
+        <p>Le quintette Atout vent, formé en 2024 au Havre, a repris l'ouverture de <i>La Flûte enchantée</i> de Mozart. L'objectif était de promouvoir le patrimoine architectural tout en ravivant la musique de chambre.</p>
       </div>
+      <button class="nav-btn" onclick="closeJournal()">Refermer</button>
     </div>
 
-    <div class="page page-right">
+    <div class="page p-sandouville-img">
+      <div class="gazette-header"><div class="gazette-meta"><span>Illustration</span><span>Sandouville</span></div></div>
+      <img src="CC 2026_04_03 (2)_page-0001.jpg" alt="Article Sandouville" class="photo-raw">
+      <button class="nav-btn" onclick="turnPage()">Page Suivante →</button>
+    </div>
+
+    <div class="page p-graville-txt">
       <div class="gazette-header">
         <div class="gazette-meta"><span>Événements</span><span>Article 2</span></div>
       </div>
       <h2 class="headline">Concert Atout Vent</h2>
       <div class="article-text drop-cap">
-        <img src="IMG_20260415_0003.jpg" alt="Abbaye de Graville" class="photo-raw">
-        <p>
-          Le Concert Atout Vent mettra en scène un quintette à vent avec un programme musical célébrant le printemps. Les spectateurs pourront écouter des extraits de Peer Gynt, Mozart, Tchaïkovski, Debussy et Fauré.
-        </p>
-        <p>
-          Rendez-vous samedi 25 avril à 15 h 30. Durée : 1 heure avec entracte. Entrée gratuite, avec participation libre en fin de concert au profit d'Atout Vent. Réservations conseillées.
-        </p>
+        <p>Le Concert Atout Vent mettra en scène un quintette avec un programme célébrant le printemps : Peer Gynt, Mozart, Tchaïkovski, Debussy et Fauré.</p>
+        <p>Rendez-vous samedi 25 avril à 15 h 30. Durée : 1 heure avec entracte. Entrée gratuite, participation libre au profit d'Atout Vent. Réservations conseillées.</p>
       </div>
-      <p style="text-align: center; margin-top: auto; font-size: 0.7rem; font-style: italic; opacity: 0.5;">Cliquer pour refermer</p>
+      <button class="nav-btn" onclick="backPage()">← Page Précédente</button>
+    </div>
+
+    <div class="page p-graville-img">
+      <div class="gazette-header"><div class="gazette-meta"><span>Illustration</span><span>Graville</span></div></div>
+      <img src="IMG_20260415_0003.jpg" alt="Abbaye de Graville" class="photo-raw">
+      <button class="nav-btn" onclick="closeJournal()">Refermer l'édition</button>
     </div>
 
   </div>
 </div>
 
 <script>
-  const journal = document.getElementById('journal');
-  journal.addEventListener('click', () => {
-    journal.classList.toggle('is-open');
-  });
+  const book = document.getElementById('journal');
+
+  function openJournal() { book.classList.add('is-open'); }
+  function closeJournal() { book.classList.remove('is-open', 'second-page'); }
+  function turnPage() { book.classList.add('second-page'); }
+  function backPage() { book.classList.remove('second-page'); }
 </script>
 
 </body>
